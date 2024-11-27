@@ -1,0 +1,16 @@
+.HomeContent {
+    display: flex;
+    flex-wrap: nowrap; 
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    top: 10px;
+    height: 70vh;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.HomeMessage {
+    color: white;
+    font-size: 6.5vw;  
+}
