@@ -1,0 +1,94 @@
+.QuizesTitle{
+    text-align: center;
+    color: white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin-top: 10px;
+    font-size: 50px;
+}
+
+.Quiz {
+    background-color: white;
+    margin: 20px auto;
+    min-height: 20px;
+    height: 55px;
+    max-width: 90%;
+    width: 700px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.QuizTitle{
+    font-size: 27px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+@media (max-width: 600px) {
+    .Quiz {
+        width: 100%; 
+    }
+}
+
+.PlayLogo{
+    font-size: 70px;
+    
+}
+
+.PlayButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; 
+    cursor: pointer; 
+    background-color: rgb(36, 127, 247);
+    padding: 5px;
+    border-radius: 5px;
+    color: white;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.PlayButton h1{
+    font-size: 28px;
+    margin-right: 5px;
+}
+
+.PlayButton svg{
+    font-size: 22px;
+}
+
+.PlayButton:hover{
+    background-color: rgb(0, 73, 168);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.PlayButton:active{
+    background-color: rgb(36, 127, 247);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.Container {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    gap: 10px;
+}
+
+.PlayButton, .EditLogo {
+    display: flex;
+    align-items: center;
+    gap: 1px;
+}
+
+.EditLogo{
+    font-size: 28px;
+}
+
+h1 {
+    margin: 0;
+}
