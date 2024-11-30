@@ -222,25 +222,6 @@ html, body {
     transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
 
-@media screen and (max-width: 600px) {
-    .Answer1, .Answer2, .Answer3, .Answer4 {
-        min-width: 340px;
-        font-size: 12px;
-    }
-    .AnswerInput{
-        width: 240px;
-    }
-    .TitleText h1{
-        font-size: 23px;  
-
-    }
-    .TitleInput{
-        font-size: 21px;
-        width: 100px;
-    }
-
-
-}
 
 .QuestionList {
     display: flex;
@@ -317,4 +298,27 @@ html, body {
 
 .QuestionItem:hover {
     background-color: rgb(208, 207, 207);
+}
+
+@media screen and (max-width: 600px) {
+    .Answer1, .Answer2, .Answer3, .Answer4 {
+        min-width: 340px;
+        font-size: 12px;
+    }
+    .AnswerInput{
+        width: 240px;
+    }
+    .TitleText h1{
+        font-size: 23px;  
+
+    }
+    .TitleInput{
+        font-size: 21px;
+        width: 100px;
+    }
+    .addQuestion{
+        width: auto
+    }
+
+
 }

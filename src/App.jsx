@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import Home from './Home/Home'
 import Quizes from './Quizes/Quizes'
 import Create from './Create/Create'
+import MainGame from './Game/MainGame'
+import Missing from './Missing'
 import { Route, Routes, useLocation } from 'react-router-dom'
 
 function App() {
@@ -202,6 +204,11 @@ function App() {
 
       </Route>
 
+      <Route path='/quiz-project/play/:name' element={<MainGame/>}>
+
+
+      </Route>
+
       <Route path='/quiz-project/create' element={<Create 
       
       handleCheckedAnswer={handleCheckedAnswer} 
@@ -225,6 +232,15 @@ function App() {
       
       />}>
 
+
+      </Route>
+
+      <Route path='*' element={<Missing
+      width={width} 
+      handleMobileOptions={handleMobileOptions}
+      showOptions={showOptions}
+      limit={limit}
+      />}>
 
       </Route>
 

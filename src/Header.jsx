@@ -23,7 +23,7 @@ function Header(){
 
             <div className="HeaderLinksItems">
                 
-                <Link className="linkDecoration" to='/quiz-project'>
+                <Link className="linkDecoration" to={`/quiz-project/play/${'name'}`}>
                 <div className="Link">
                 
                     <RiHomeSmileFill></RiHomeSmileFill>
