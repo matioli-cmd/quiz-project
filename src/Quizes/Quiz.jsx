@@ -10,7 +10,7 @@ function Quiz({quiz}){
 
     <div>
 
-        <h1 className={styles.QuizTitle}>{quiz}</h1>
+        <h1 className={styles.QuizTitle}>{quiz.quizName}</h1>
 
     </div>
         

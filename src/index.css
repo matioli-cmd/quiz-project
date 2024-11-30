@@ -107,67 +107,50 @@ html{
   padding: 10px;             
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
   width: 170px; 
-  height: 200px;              
+  height: 180px;              
   margin: 20px auto;          
   text-align: center;       
   position: absolute;
   right: 10px;
   top: 50px;
   z-index: 2;
-  flex-direction: column;
   display: flex;
-  white-space: nowrap
-  ;
   flex-direction: column;
-  
+  white-space: nowrap;
 }
-.Links h1{
+
+.Links h1 {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   color: white;
-  font-size: 22px;
-  margin-bottom: 10px;
-
+  font-size: 20px;
+  margin: 10px 0; 
 }
 
-.Links svg{
-  font-size: 25px;
-}
-
-.LinkItems:hover{
-  background-color: white;
-}
-
-.LinkItems:hover{
-  display: flex;
-  flex-direction: column;
-}
-
-.MobileLink{
+.MobileLink {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 10px; 
   padding: 7px;  
   text-decoration: none; 
   border-radius: 5px; 
-  text-align: center;  
-  max-width: 150px; 
+  justify-content: flex-start;
+  text-align: left;  
+  width: 100%; 
+  box-sizing: border-box; 
   transition: background-color 0.3s ease, color 0.3s ease;
-
 }
+
 .MobileLink:hover {
   background-color: white;
   color: black;
-  width: 100%;
-
 }
 
 .MobileLink:active {
   background-color: rgb(20, 20, 21);
-  color: rgb(255, 255, 255);
-
+  color: white;
 }
 
-.linkDecoration{
+.linkDecoration {
   text-decoration: none;
   color: white;
 }

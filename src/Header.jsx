@@ -1,5 +1,3 @@
-import { MdQuiz } from "react-icons/md";
-import { MdOutlineCreate } from "react-icons/md";
 import { FaPlusSquare } from "react-icons/fa";
 import { FaPlay } from "react-icons/fa6";
 import { GiWizardFace } from "react-icons/gi";

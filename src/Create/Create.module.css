@@ -114,13 +114,7 @@ html, body {
         height: 120px;
         font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     }
-
-    @media screen and (max-width: 600px) {
-        .Answer1, .Answer2, .Answer3, .Answer4 {
-            min-width: 300px;
-            font-size: 12px;
-        }}
-
+.AnswerInput::placeholder
     .Answer h2 {
         margin: 0;
         font-size: 20px;
@@ -129,6 +123,7 @@ html, body {
     .Checkbox {
         font-size: 40px;
         transition: font-size 0.3s ease;
+        cursor: pointer;
     }
     
     .Checkbox:hover {
@@ -136,20 +131,42 @@ html, body {
     }
      
 .Answer1{
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
     background-color: rgb(227, 56, 56);
 }
+.Answer1:hover{
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    background-color: rgb(168, 43, 43);
+}
 .Answer2{
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
     background-color: rgb(56, 119, 227);
 }
+.Answer2:hover{
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    background-color: rgb(40, 85, 162);
+}
 .Answer3{
-    background-color: rgb(72, 198, 49);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    background-color: rgb(50, 173, 75);
+}
+.Answer3:hover{
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    background-color: rgb(40, 134, 59);
 }
 .Answer4{
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
     background-color: rgb(227, 170, 56);
+}
+.Answer4:hover{
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    background-color: rgb(194, 146, 49);
 }
 
 .QuestionList{
     position: fixed;
+    display: flex;
+    justify-content: center;
     bottom: 0;
     left: 0;
     height: 140px;
@@ -158,6 +175,7 @@ html, body {
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
     padding: 10px;
     margin-top: 120px;
+    border-top: rgb(147, 147, 147) solid 0.6px; ;
 }
 
 @media screen and (max-width: 850px) {
@@ -167,3 +185,136 @@ html, body {
         flex-direction: column;
         margin-bottom: 150px;}
     }
+
+    .AnswerInput {
+        background-color: transparent;
+        color: white;
+        font-size: 18px;
+        padding: 3px;
+        outline-style: none;
+    }
+
+.AnswerInput::placeholder{
+    color: white;
+}
+
+.addQuestion{
+    color: white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: rgb(36, 127, 247);
+    padding: 5px;
+    border-radius: 5px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    width: 50%;
+    font-size: 12px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.addQuestion:hover{
+    background-color: rgb(0, 73, 168);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.addQuestion:active{
+    background-color: rgb(36, 127, 247);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+@media screen and (max-width: 600px) {
+    .Answer1, .Answer2, .Answer3, .Answer4 {
+        min-width: 340px;
+        font-size: 12px;
+    }
+    .AnswerInput{
+        width: 240px;
+    }
+    .TitleText h1{
+        font-size: 23px;  
+
+    }
+    .TitleInput{
+        font-size: 21px;
+        width: 100px;
+    }
+
+
+}
+
+.QuestionList {
+    display: flex;
+    flex-direction: column;  
+    align-items: center;     
+    width: 100%;
+    background-color: rgb(20, 20, 21);
+    padding: 20px;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    border-top: rgb(147, 147, 147) solid 0.6px;
+}
+
+.addQuestionContainer {
+    display: flex;
+    justify-content: center;    
+    gap: 10px;                 
+    margin-bottom: 15px;      
+    width: 100%;                
+}
+
+
+.addQuestion, .DeleteButton {
+    color: white;
+    background-color: rgb(36, 127, 247);
+    padding: 10px 15px;      
+    border-radius: 5px;
+    height: 40px;
+    min-width: 150px;       
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+    white-space: nowrap;      
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+.DeleteButton {
+    color: white;
+    background-color: rgb(220, 49, 49);
+    padding: 10px 11px;        
+    border-radius: 5px;
+    height: 42px;
+    min-width: 120px;         
+    display: flex;
+    align-items: center;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+    white-space: nowrap;       
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+.DeleteButton:hover{
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    background-color: rgb(159, 37, 37);
+}
+.Questions {
+    display: flex;
+    flex-wrap: wrap;        
+    justify-content: center; 
+    gap: 10px;               
+    width: 100%;
+}
+
+.QuestionItem {
+    color: black;
+    background-color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.QuestionItem:hover {
+    background-color: rgb(208, 207, 207);
+}

@@ -1,22 +1,25 @@
+import { Link } from 'react-router-dom'
 import styles from './Create.module.css'
 
 
-function CreateHeader(){
+function CreateHeader({quizName, handleQuizName, handleNewQuiz}){
     return(
         <header className={styles.CreateHeader}>
         
         <div className={styles.TitleText}>
 
         <h1>Name</h1>
-        <input className={styles.TitleInput}></input>
+        <input className={styles.TitleInput} value={quizName} onChange={(e) => handleQuizName(e)}></input>
 
         </div>
 
-        <div className={styles.SaveButton}>
+        <Link to='/quiz-project/quizes' style={{textDecoration: 'none'}}>
+            <div className={styles.SaveButton} onClick={handleNewQuiz}>
 
             <h1>Save</h1>
 
-        </div>
+            </div>
+        </Link>
        
 
     </header>

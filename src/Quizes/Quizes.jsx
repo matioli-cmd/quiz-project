@@ -1,6 +1,5 @@
 import Header from '/src/Header.jsx'
 import MobileHeader from '/src/MobileHeader.jsx'
-import styles from './Quizes.module.css'
 import QuizList from './Quizlist'
 
 function Quizes({handleMobileOptions, width, showOptions, limit, quizes}){
@@ -13,12 +12,6 @@ function Quizes({handleMobileOptions, width, showOptions, limit, quizes}){
             showOptions={showOptions}
             /> : <Header/>}
 
-
-        <div>
-
-            <h1 className={styles.QuizesTitle}>My Quizes</h1>
-
-        </div>
 
         <div>
 
