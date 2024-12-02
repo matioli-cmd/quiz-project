@@ -141,6 +141,8 @@ function App() {
   function handleEditQuiz(quiz){
 
     const id = quiz.id
+
+    console.log("NEW QUIZ")
     
     if(questions.length > 0 && quizName){
     setQuizes(quizes.map(q => q.id == id ? {...{'id': id,
@@ -307,16 +309,6 @@ function App() {
        handleNewQuiz={handleNewQuiz}
        handleDeleteQuestion={handleDeleteQuestion}
        quizes={quizes}
-        setQuestionTitle={setQuestionTitle}
-        setAnswer1={setAnswer1}
-        setAnswer2={setAnswer2}
-        setAnswer3={setAnswer3}
-        setAnswer4={setAnswer4}
-        setChecked={setChecked}
-        setQuizName={setQuizName}
-        setQuestions={setQuestions}
-        setEditingMode={setEditingMode}
-        setEditedQuestionId={setEditedQuestionId}
         handleEditQuiz={handleEditQuiz}
         handleEditQuizItems={handleEditQuizItems}
       

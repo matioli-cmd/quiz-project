@@ -5,8 +5,7 @@ import CreateQuestion from './CreateQuestion';
 import QuestionList from './QuestionList';
 import { useEffect } from 'react';
 
-function EditQuiz({handleEditQuizItems, checked, handleEditQuiz, quizes, handleDeleteQuestion, showQuestion, questions, EditingMode, handleNewQuestion, handleCheckedAnswer, handleQuizName, quizName, questionTitle, handleEditQuestion, handleQuestionTitle, Answer1, Answer2, Answer3, Answer4, handleAnswerChange, setQuestionTitle,
-    setAnswer1, setAnswer2, setAnswer3, setAnswer4, setChecked, setQuizName, setQuestions, setEditingMode, setEditedQuestionId}){
+function EditQuiz({handleEditQuizItems, checked, handleEditQuiz, quizes, handleDeleteQuestion, showQuestion, questions, EditingMode, handleNewQuestion, handleCheckedAnswer, handleQuizName, quizName, questionTitle, handleEditQuestion, handleQuestionTitle, Answer1, Answer2, Answer3, Answer4, handleAnswerChange}){
 
     const { id } = useParams()
 
