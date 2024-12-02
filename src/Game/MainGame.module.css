@@ -4,109 +4,205 @@
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-.Answers {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Two equal columns */
-    gap: 10px;                            /* Smaller gap between items */
-    max-width: 1000px; 
-    margin: 20px auto;
-    padding: 20px;
-    font-size: 12px;
-    box-sizing: border-box;
-    margin-top: 200px;
-    justify-content: center;
-}
-
-.Answer1, .Answer2, .Answer3, .Answer4 {
+.PageContainer {
     display: flex;
-    justify-content: center;     /* Center text horizontally */
-    align-items: center;         /* Center text vertically */
-    text-align: center;          
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-    color: rgb(255, 255, 255);
-    width: 100%;                 /* Use full grid cell width */
-    height: 100px;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;  
+    min-height: 70vh;
+    padding: 20px;
     box-sizing: border-box;
-}
-
-
-.Answer1{
-transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
-background-color: rgb(227, 56, 56);
-}
-.Answer1:hover{
-transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
-background-color: rgb(168, 43, 43);
-}
-.Answer2{
-transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
-background-color: rgb(56, 119, 227);
-}
-.Answer2:hover{
-transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
-background-color: rgb(40, 85, 162);
-}
-.Answer3{
-transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
-background-color: rgb(50, 173, 75);
-}
-.Answer3:hover{
-transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
-background-color: rgb(40, 134, 59);
-}
-.Answer4{
-transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
-background-color: rgb(227, 170, 56);
-}
-.Answer4:hover{
-transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
-background-color: rgb(194, 146, 49);
-}
-
-
-.QuestionTitle {
+    gap: 20px;  
+  }
+  
+  .AnswerContainer {
+    width: 100%;
+    max-width: 800px;
+  }
+  
+  .QuestionTitle {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     color: white;
+    text-align: center;
+    font-size: 18px;
+    max-width: 500px;
+    word-wrap: break-word;  
+    overflow-wrap: break-word;  
+    white-space: normal;  
+    margin: 0 auto; 
+  }
+  
+
+  .Answers {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);  
+    gap: 20px;                         
+  }
+  
+  .Answer1, .Answer2, .Answer3, .Answer4 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 10px;
+    font-size: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: rgb(255, 255, 255);
+    height: 120px;                         
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+    box-sizing: border-box;
+  }
+  
+  .Answer1 { background-color: rgb(227, 56, 56); }
+  .Answer2 { background-color: rgb(56, 119, 227); }
+  .Answer3 { background-color: rgb(50, 173, 75); }
+  .Answer4 { background-color: rgb(227, 170, 56); }
+
+  .Answer1:hover, .Answer2:hover, .Answer3:hover, .Answer4:hover {
+    transform: translateY(-5px);           
+  }
+  
+
+@media (max-width: 768px) {
+    .QuestionTitle {
+      font-size: 14px;       
+      margin-bottom: 40px;    
+    }
+  
+    .Answers {
+      grid-template-columns: 1fr; 
+      
+    }
+    
+  
+    .Answer1, .Answer2, .Answer3, .Answer4 {
+      height: 100px;         
+    }
+  }
+  
+
+  .ShowingAnswer1, .ShowingAnswer2, .ShowingAnswer3, .ShowingAnswer4 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    border-radius: 10px;
+    font-size: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: rgb(255, 255, 255);
+    height: 120px;                         
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+    box-sizing: border-box;
+  }
+
+  .ShowingAnswer1 h1, .ShowingAnswer2 h1, .ShowingAnswer3 h1, .ShowingAnswer4 h1 {
+    margin-left: 20px;
+  }
+  
+  .ShowingAnswer1 { background-color: rgb(169, 42, 42); }
+  .ShowingAnswer2 { background-color: rgb(56, 119, 227); }
+  .ShowingAnswer3 { background-color: rgb(50, 173, 75); }
+  .ShowingAnswer4 { background-color: rgb(227, 170, 56); }
+
+  .ShowingAnswer1:hover, .ShowingAnswer2:hover, .ShowingAnswer3:hover, .ShowingAnswer4:hover {
+    transform: translateY(-5px);           
+  }
+
+  .EndTitle{
+    color: white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 22px;
+  }
+
+  .Results {
+    width: auto; 
+    padding: 30px 30px;
+    height: auto;
+    margin-top: 20px;
+    font-size: 15px;
+    background-color: rgb(255, 255, 255); 
     display: flex;
     justify-content: center; 
-    align-items: center;      
-    text-align: center;
-    position: absolute;
-    top: 28%;              
-    font-size: 20px;
-    left: 50%;               
-    transform: translate(-50%, -50%);
+    align-items: center;
+    gap: 20px;
+    flex-direction: column;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  }
+
+.Button{
+    color: rgb(255, 255, 255);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: rgb(36, 127, 247);
+    width: auto;
+    padding: 10px 30px;
+    border-radius: 6px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+
 }
 
+.ButtonHolder{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px
+    ;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
 
-@media screen and (max-width: 900px) {
+.Button:hover{
+    background-color: rgb(0, 73, 168);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
 
+.Button:active{
+    background-color: rgb(36, 127, 247);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .QuestionTitle {
+      font-size: 14px;       
+      margin-bottom: 40px;    
+    }
+  
     .Answers {
-        display: flex;
-        flex-direction: column;
-        font-size: 12px;
-        margin-top: 120px
+      grid-template-columns: 1fr; 
+      
+    }
     
-    }
+  
     .Answer1, .Answer2, .Answer3, .Answer4 {
-        width: 500px;
-        font-size: 12px;
-        margin: 0 auto;
-    }
-    .QuestionTitle{
-        top: 20%;
-        font-size: 15px;
-    }
+      height: 100px;         
     }
 
-    @media screen and (max-width: 600px) {
-        .Answer1, .Answer2, .Answer3, .Answer4 {
-            width: 340px;
-            font-size: 12px;
-            margin: 0 auto;
-        }
-    
-    
+    .ShowingAnswer1, .ShowingAnswer2, .ShowingAnswer3, .ShowingAnswer4 {
+        height: 100px;
+  }
+  }
+
+.XMark{
+    font-size: 50px;
+    margin-right: 20px;
+}
+  
+
+@media (max-width: 480px) {
+    .QuestionTitle {       
+      margin-bottom: 20px;   
     }
+  
+    .Answer1, .Answer2, .Answer3, .Answer4 {
+      height: 80px;            
+    }
+    .ShowingAnswer1, .ShowingAnswer2, .ShowingAnswer3, .ShowingAnswer4 {
+        height: 80px;
+  }
+
+
+  }

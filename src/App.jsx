@@ -4,6 +4,8 @@ import Quizes from './Quizes/Quizes'
 import Create from './Create/Create'
 import MainGame from './Game/MainGame'
 import Missing from './Missing'
+import EditQuiz from './Create/EditQuiz'
+import Error from './Error'
 import { Route, Routes, useLocation } from 'react-router-dom'
 
 function App() {
@@ -12,7 +14,18 @@ function App() {
 
   const [width, setwidth] = useState(window.innerWidth)
   const [showOptions, setOptions] = useState(false)
-  const [quizes, setQuizes] = useState([])
+  const [quizes, setQuizes] = useState([{'id': 0,
+    'quizName': '💜', objects: [{'id': 0,
+      'title': 'How much does Gabe love Jimena?', 
+      'answers':['100%', '2%', '1 Googol', '1 Trillion'], 
+      'correct':['Answer3']}, 
+        {'id': 1,
+        'title': 'Does Gabe love Jimena?', 
+        'answers':['Yes', 'Absolutely', 'No Doubt', 'Very Much'], 
+        'correct':['Answer1', 'Answer2', 'Answer3', 'Answer4']}, {'id': 2,
+          'title': 'What is Gabes favorite color?', 
+          'answers':['Navy Blue', 'Green', 'Purple', 'Blue'], 
+          'correct':['Answer1', 'Answer3']}]}])
 
   // QUESTION STATES
 
@@ -54,11 +67,13 @@ function App() {
 
   function handleQuizName(e){
     setQuizName(e.target.value)
+    console.log(e.target.value)
   }
 
   function handleNewQuiz(){
     if(questions.length > 0 && quizName){
-      setQuizes(s => [...s, {'quizName': quizName, objects: questions}])
+      setQuizes(s => [...s, {'id':  quizes.length > 0 ? quizes[quizes.length - 1].id + 1 : 0,
+ 'quizName': quizName, objects: questions}])
     }
   }
 
@@ -123,6 +138,19 @@ function App() {
 
   }
 
+  function handleEditQuiz(quiz){
+
+    const id = quiz.id
+    
+    if(questions.length > 0 && quizName){
+    setQuizes(quizes.map(q => q.id == id ? {...{'id': id,
+      'quizName': quizName, objects: questions}} : q))
+    setEditingMode(false)
+    
+    ResetQuestionFormat()}
+
+  }
+
   function handleEditQuestion(id){
 
     id = EditedQuestionId
@@ -146,12 +174,9 @@ function App() {
   }
 
   useEffect(() => {
-    console.log(questions)
-  }, [questions])
-
-  useEffect(() => {
     function resize(){
       setwidth(window.innerWidth)
+      setOptions(false)
     }
 
     window.addEventListener('resize', resize)
@@ -176,6 +201,11 @@ function App() {
     setEditingMode(false)
     setEditedQuestionId('')
   }, [location])
+
+  function handleEditQuizItems(quiz){
+    setQuizName(quiz.quizName)
+    setQuestions(quiz.objects)
+  }
 
   return (
     
@@ -204,7 +234,12 @@ function App() {
 
       </Route>
 
-      <Route path='/quiz-project/play/:name' element={<MainGame/>}>
+      <Route path='/quiz-project/play/:id' element={<MainGame 
+      quizes={quizes}
+      width={width} 
+      handleMobileOptions={handleMobileOptions}
+      showOptions={showOptions}
+      limit={limit}/>}>
 
 
       </Route>
@@ -235,12 +270,58 @@ function App() {
 
       </Route>
 
+      <Route path='/quiz-project/error' element={<Error
+      width={width} 
+      handleMobileOptions={handleMobileOptions}
+      showOptions={showOptions}
+      limit={limit}
+      />}>
+      </Route>
+
       <Route path='*' element={<Missing
       width={width} 
       handleMobileOptions={handleMobileOptions}
       showOptions={showOptions}
       limit={limit}
       />}>
+
+      </Route>
+
+      <Route path='/quiz-project/edit/:id' element={<EditQuiz
+       handleCheckedAnswer={handleCheckedAnswer} 
+       checked={checked}
+       quizName={quizName}
+       questionTitle={questionTitle}
+       handleQuestionTitle={handleQuestionTitle}
+       handleQuizName={handleQuizName}
+       questions={questions}
+       handleNewQuestion={handleNewQuestion}
+       Answer1={Answer1}
+       Answer2={Answer2}
+       Answer3={Answer3}
+       Answer4={Answer4}
+       handleAnswerChange={handleAnswerChange}
+       handleEditQuestion={handleEditQuestion}
+       EditingMode={EditingMode}
+       showQuestion={showQuestion}
+       handleNewQuiz={handleNewQuiz}
+       handleDeleteQuestion={handleDeleteQuestion}
+       quizes={quizes}
+        setQuestionTitle={setQuestionTitle}
+        setAnswer1={setAnswer1}
+        setAnswer2={setAnswer2}
+        setAnswer3={setAnswer3}
+        setAnswer4={setAnswer4}
+        setChecked={setChecked}
+        setQuizName={setQuizName}
+        setQuestions={setQuestions}
+        setEditingMode={setEditingMode}
+        setEditedQuestionId={setEditedQuestionId}
+        handleEditQuiz={handleEditQuiz}
+        handleEditQuizItems={handleEditQuizItems}
+      
+      />}>
+
 
       </Route>
 

@@ -6,7 +6,7 @@ function QuizList({quizes}){
         <>
         
         {quizes.length > 0 ? quizes.map((quiz) => 
-            <Quiz quiz={quiz}></Quiz>
+            <Quiz key={quiz.id} quiz={quiz}></Quiz>
         ) : <h1 className={styles.emptyPage}>No quizes available</h1>}
         
         

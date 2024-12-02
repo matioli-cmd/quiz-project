@@ -33,7 +33,7 @@ function MobileHeader({handleMobileOptions, showOptions}){
             <div className="Links">
                     
                     <div>
-                        <Link className="linkDecoration"  to={`/quiz-project/play/${'name'}`}>
+                        <Link className="linkDecoration"  to={`/quiz-project`}>
                             <h1 className="MobileLink"><RiHomeSmileFill/>Home</h1>
                         </Link>
                         <Link className="linkDecoration" to={'/quiz-project/create'}>

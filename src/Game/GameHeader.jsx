@@ -1,12 +1,12 @@
 import styles from './MainGame.module.css'
 
-function GameHeader(){
+function GameHeader({Score}){
     return(
         <header className="Header">
                
         <div className={styles.Score}>
 
-            <h1>Score: 0</h1>
+            <h1>Score: {Score}</h1>
 
         </div>
 

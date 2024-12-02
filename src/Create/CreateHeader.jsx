@@ -9,7 +9,7 @@ function CreateHeader({quizName, handleQuizName, handleNewQuiz}){
         <div className={styles.TitleText}>
 
         <h1>Name</h1>
-        <input className={styles.TitleInput} value={quizName} onChange={(e) => handleQuizName(e)}></input>
+        <input className={styles.TitleInput} value={quizName}  maxLength={25} onChange={(e) => handleQuizName(e)}></input>
 
         </div>
 
