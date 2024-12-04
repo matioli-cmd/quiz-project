@@ -13,9 +13,18 @@ function EditQuiz({handleEditQuizItems, checked, handleEditQuiz, quizes, handleD
 
     useEffect(() => {
 
-        handleEditQuizItems(Quiz)
+        if(Quiz){
+            handleEditQuizItems(Quiz)
+            console.log("Successfully loaded")
+        }
+        else{
+            console.log("Error")
+        }
+        
 
     }, [Quiz])
+
+    console.log(Quiz)
     
 
     return(

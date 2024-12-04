@@ -14,18 +14,7 @@ function App() {
 
   const [width, setwidth] = useState(window.innerWidth)
   const [showOptions, setOptions] = useState(false)
-  const [quizes, setQuizes] = useState([{'id': 0,
-    'quizName': '💜', objects: [{'id': 0,
-      'title': 'How much does Gabe love Jimena?', 
-      'answers':['100%', '2%', '1 Googol', '1 Trillion'], 
-      'correct':['Answer3']}, 
-        {'id': 1,
-        'title': 'Does Gabe love Jimena?', 
-        'answers':['Yes', 'Absolutely', 'No Doubt', 'Very Much'], 
-        'correct':['Answer1', 'Answer2', 'Answer3', 'Answer4']}, {'id': 2,
-          'title': 'What is Gabes favorite color?', 
-          'answers':['Navy Blue', 'Green', 'Purple', 'Blue'], 
-          'correct':['Answer1', 'Answer3']}]}])
+  const [quizes, setQuizes] = useState([])
 
   // QUESTION STATES
 
@@ -67,7 +56,6 @@ function App() {
 
   function handleQuizName(e){
     setQuizName(e.target.value)
-    console.log(e.target.value)
   }
 
   function handleNewQuiz(){
@@ -77,9 +65,6 @@ function App() {
     }
   }
 
-  useEffect(() => {
-    console.log(quizes)
-  }, [quizes])
 
   function handleQuestionTitle(e){
     setQuestionTitle(e.target.value)
@@ -141,8 +126,6 @@ function App() {
   function handleEditQuiz(quiz){
 
     const id = quiz.id
-
-    console.log("NEW QUIZ")
     
     if(questions.length > 0 && quizName){
     setQuizes(quizes.map(q => q.id == id ? {...{'id': id,

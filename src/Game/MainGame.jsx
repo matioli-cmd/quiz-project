@@ -6,10 +6,25 @@ import Error from '../Error'
 import {FaXmark } from "react-icons/fa6";
 import { FaCheck } from "react-icons/fa";
 import { Link } from 'react-router-dom'
+import LoadingIcons, { ThreeDots } from 'react-loading-icons'
 
 function MainGame({quizes, width, limit, handleMobileOptions, showOptions}){
 
     const { id } = useParams()
+
+    const wizardPuns = [
+        "Casting spell...",
+        "Summoning data...",
+        "Enchanting load...",
+        "Brewing results...",
+        "Waving wand...",
+        "Charging scroll...",
+        "Aligning crystals...",
+        "Quiz magic rising...",
+        "Channeling spells...",
+        "Arcane loading...",
+      ];
+
 
     const Quiz = quizes.find((quiz) => quiz.id == id)
 
@@ -19,21 +34,46 @@ function MainGame({quizes, width, limit, handleMobileOptions, showOptions}){
     const [ChosenAnswer, setChosenAnswer] = useState('')
     const [GameOver, setGameOver] = useState(false) 
     const [correct, setCorrect] = useState(0)
+    const [Loading, setLoading] = useState(true)
+    const [LoadingText, setLoadingText] = useState(wizardPuns[Math.floor(Math.random() * wizardPuns.length)])
     const [incorrect, setIncorrect] = useState(0)
+
+    useEffect(() => {
+
+
+        const timeout = setInterval(() => {
+            const RandomPun = wizardPuns[Math.floor(Math.random() * wizardPuns.length)]
+            setLoadingText(RandomPun)
+        }, 4000);
+
+        return () => {clearInterval(timeout)}
+
+    }, [Loading])
+
+    useEffect(() => {
+
+        const timeout = setTimeout(() => {
+            setLoading(false)
+        }, 4000);
+
+        return () => {clearTimeout(timeout)}
+
+    },[])
 
     const [time, setTime] = useState(0)
 
     useEffect(() => {
         let Change;
 
-        if(!GameOver){
+        if(!GameOver && !Loading){
             Change = setInterval(() => {
                 setTime(t => t += 1)
             }, 1000);
         }
+
       
         return () => {clearTimeout(Change)}
-    }, [GameOver])
+    }, [GameOver, Loading])
 
     function incorrectAnswer(answer){
         if(ChosenAnswer == answer){
@@ -84,11 +124,25 @@ function MainGame({quizes, width, limit, handleMobileOptions, showOptions}){
     }
   
     return(
-        <>
+        <>  
+            
 
-            {Quiz && !ShowAnswers && !GameOver &&(
+            {Quiz && !ShowAnswers && !GameOver && Loading && (
+                <>
+ 
+                <div className={styles.Loading}>
+                <h1>{LoadingText}</h1>
+                <ThreeDots width="70" height="70" />
+                </div>
+                </>
+
+             
+               
+            )}
+
+            {Quiz && !ShowAnswers && !GameOver && !Loading &&(
             <>
-                <GameHeader Score={Score} />
+                       <GameHeader Score={Score} />
                 <div className={styles.PageContainer}>
                 <div className={styles.QuestionTitle}>
                     <h1>{Quiz.objects[currentQuestion].title}</h1>
@@ -113,9 +167,10 @@ function MainGame({quizes, width, limit, handleMobileOptions, showOptions}){
             </>
             )}
 
-            {Quiz && ShowAnswers && !GameOver &&(
+            {Quiz && ShowAnswers && !GameOver && !Loading &&(
+
             <>
-                <GameHeader Score={Score} />
+                   <GameHeader Score={Score} />
                 <div className={styles.PageContainer}>
                 <div className={styles.QuestionTitle}>
                     <h1>{Quiz.objects[currentQuestion].title}</h1>
@@ -152,27 +207,29 @@ function MainGame({quizes, width, limit, handleMobileOptions, showOptions}){
             </>
             )}
 
-            {Quiz && GameOver &&
+            {Quiz && GameOver && !Loading &&
             <>  
-                <GameHeader Score={Score} />
-                 <div className={styles.EndTitle}>
-                    <h1>Quiz results</h1>
-                </div>
+                   <GameHeader Score={Score} />
 
+                <div className={styles.ResultsContainer}>
                 <div className={styles.Results}>
                     <h1>Accuracy: {`${Math.floor((correct/Quiz.objects.length) * 100)}%`}</h1>
                     <h1>Correct: {correct}</h1>
                     <h1>Incorrect: {incorrect}</h1>
                     <h1>Time taken: { `${String(Math.floor(time / 60)).padStart(2, '0')}:${String(Math.floor(time % 60)).padStart(2, '0')}`}</h1>
-                </div>
-
-                <div className={styles.ButtonHolder}>
+                    <div className={styles.ButtonHolder}>
                     <Link to={`/quiz-project/quizes`} style={{textDecoration: 'None'}}>
-                    <h1 className={styles.Button}>Play Again</h1>
+                    <h1 className={styles.Button}>Play more</h1>
                     </Link>
                    
 
                 </div>
+                </div>
+                
+                </div>
+              
+
+    
 
             </>
            
