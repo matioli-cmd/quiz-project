@@ -6,9 +6,11 @@ import MainGame from './Game/MainGame'
 import Missing from './Missing'
 import EditQuiz from './Create/EditQuiz'
 import Error from './Error'
-import { Route, Routes, useLocation } from 'react-router-dom'
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 
 function App() {
+
+  const Navigate = useNavigate()
 
   const limit = 700
 
@@ -62,7 +64,10 @@ function App() {
     if(questions.length > 0 && quizName){
       setQuizes(s => [...s, {'id':  quizes.length > 0 ? quizes[quizes.length - 1].id + 1 : 0,
  'quizName': quizName, objects: questions}])
-    }
+    
+    Navigate('/quiz-project/quizes')
+
+}
   }
 
 
@@ -96,6 +101,11 @@ function App() {
 
 
     }
+  }
+
+  function DeleteQuiz(id){
+    const FilteredQuizes = quizes.filter((quiz) => quiz.id != id)
+    setQuizes(FilteredQuizes)
   }
 
   function showQuestion(question){
@@ -132,7 +142,11 @@ function App() {
       'quizName': quizName, objects: questions}} : q))
     setEditingMode(false)
     
-    ResetQuestionFormat()}
+    ResetQuestionFormat()
+    
+    Navigate('/quiz-project/quizes')
+    
+  }
 
   }
 
@@ -213,6 +227,7 @@ function App() {
         showOptions={showOptions}
         limit={limit}
         quizes={quizes}
+        DeleteQuiz={DeleteQuiz}
         >
         </Quizes>
       }>

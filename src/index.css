@@ -18,6 +18,14 @@ html{
   border-bottom: rgb(147, 147, 147) solid 0.6px;
 }
 
+.QuizListTitle{
+  color: white;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 50px;
+}
+
 .Title_Logo{
   display: inline-flex;
   gap: 8px;

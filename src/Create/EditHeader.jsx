@@ -14,13 +14,25 @@ function EditHeader({Quiz, quizName, handleQuizName, handleEditQuiz}){
 
         </div>
 
-        <Link to='/quiz-project/quizes' style={{textDecoration: 'none'}} onClick={() => handleEditQuiz(Quiz)}>
-            <div className={styles.SaveButton}>
+
+    <div className={styles.buttonHolder}>
+
+    <Link to='/quiz-project/quizes' style={{textDecoration: 'none'}}>
+        <div className={styles.BackButton}>
+
+        <h1>Back</h1>
+
+        </div>
+    </Link>
+
+    
+            <div className={styles.SaveButton} onClick={() => handleEditQuiz(Quiz)}>
 
             <h1>Save</h1>
 
             </div>
-        </Link>
+
+        </div>
        
 
     </header>

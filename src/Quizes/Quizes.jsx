@@ -2,7 +2,7 @@ import Header from '/src/Header.jsx'
 import MobileHeader from '/src/MobileHeader.jsx'
 import QuizList from './Quizlist'
 
-function Quizes({handleMobileOptions, width, showOptions, limit, quizes}){
+function Quizes({handleMobileOptions, width, showOptions, limit, quizes, DeleteQuiz}){
     return(
         <>
         
@@ -14,9 +14,9 @@ function Quizes({handleMobileOptions, width, showOptions, limit, quizes}){
 
 
         <div>
-
+            <h1 className='QuizListTitle'>My quizes</h1>
             
-            <QuizList quizes={quizes}></QuizList>
+            <QuizList quizes={quizes} width={width} DeleteQuiz={DeleteQuiz}></QuizList>
 
 
         </div>

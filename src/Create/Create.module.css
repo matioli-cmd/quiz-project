@@ -42,6 +42,10 @@ html, body {
     font-size: 30px;
 }
 
+.buttonHolder{
+    display: flex;
+}
+
 .SaveButton{
     color: white;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -56,6 +60,35 @@ html, body {
     justify-content: center;
     width: 100px;
     font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+
+.BackButton{
+    color: rgb(0, 0, 0);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: rgb(255, 255, 255);
+    padding: 5px;
+    margin-right: 10px;
+    border-radius: 5px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    width: 100px;
+    font-size: 15px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.BackButton:hover{
+    background-color: rgb(185, 185, 185);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.BackButton:active{
+    background-color: rgb(255, 255, 255);
     transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
 
@@ -318,6 +351,16 @@ html, body {
     }
     .addQuestion{
         width: auto
+    }
+    .SaveButton{
+        font-size: 12px;
+        padding: 1px;
+        width: 76px;
+    }
+    .BackButton{
+        font-size: 12px;
+        padding: 1px;
+        width: 76px;
     }
 
 
