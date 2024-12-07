@@ -4,23 +4,26 @@ import { Link } from 'react-router-dom';
 import { TbTrashXFilled } from "react-icons/tb";
 import { MdModeEdit } from "react-icons/md";
 
-function Quiz({quiz, DeleteQuiz, width}){
+function Quiz({quiz, DeleteQuiz, width, handleEditQuiz, handleEnterEditQuiz}){
     return(
 
         <div className={styles.Quiz}>
+        
    
         <div className={styles.TextSection}>
             {width > 600 && <h1 className={styles.QuizTitle}>{quiz.quizName}</h1>}
-            {width < 600 && <h1 className={styles.QuizTitle}>{quiz.quizName.slice(0,15) + '...'}</h1>}
+            {width < 600 && quiz.quizName.length < 15 && <h1 className={styles.QuizTitle}>{quiz.quizName}</h1>}
+            {width < 600 && quiz.quizName.length > 15 && <h1 className={styles.QuizTitle}>{quiz.quizName.slice(0,15) + '...'}</h1>}
+            {width == 600 && quiz.quizName.length > 15 && <h1 className={styles.QuizTitle}>{quiz.quizName.slice(0,15) + '...'}</h1>}
         </div>
 
         <div className={styles.ButtonSection}>
           <Link to={`/quiz-project/play/${quiz.id}`} className={styles.PlayButton}>
             Play
           </Link>
-          <Link to={`/quiz-project/edit/${quiz.id}`} className={styles.EditButton}>
+          <div onClick={() => handleEnterEditQuiz(quiz)} className={styles.EditButton}>
             <MdModeEdit></MdModeEdit>
-          </Link>
+          </div>
           <div className={styles.TrashButton} onClick={() => DeleteQuiz(quiz.id)}>
             <TbTrashXFilled />
           </div>

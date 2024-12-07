@@ -31,7 +31,7 @@
 
   .ButtonSection {
     display: flex; 
-    gap: 15px;
+    gap: 12px;
   }
   
   .PlayButton,
@@ -101,4 +101,29 @@
     .QuizTitle{
         font-size: 18px;
     }
+    .EditButton,
+    .TrashButton {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px; 
+      height: 40px; 
+      text-align: center;
+      border: none;
+      border-radius: 5px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s ease;
+      text-decoration: none;
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+
+    .PlayButton{
+        width: 60px;
+        height: 40px;
+    }
+    .ButtonSection {
+        gap: 8px;
+      }
   }

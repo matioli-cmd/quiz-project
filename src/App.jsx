@@ -16,7 +16,12 @@ function App() {
 
   const [width, setwidth] = useState(window.innerWidth)
   const [showOptions, setOptions] = useState(false)
-  const [quizes, setQuizes] = useState([])
+  const storage = localStorage.getItem('Quizes')
+  const [quizes, setQuizes] = useState(storage ? JSON.parse(storage) : [])
+
+  useEffect(() => {
+    localStorage.setItem('Quizes', JSON.stringify(quizes))
+  }, [quizes])
 
   // QUESTION STATES
 
@@ -133,6 +138,20 @@ function App() {
 
   }
 
+  function handleEnterEditQuiz(quiz){
+
+    const Quiz = quizes.find((q) => q.id == quiz.id)
+
+    console.log(Quiz)
+
+    if(Quiz){
+                Navigate(`/quiz-project/edit/${quiz.id}`)
+                handleEditQuizItems(Quiz)
+                
+            }
+            
+  }
+
   function handleEditQuiz(quiz){
 
     const id = quiz.id
@@ -188,23 +207,27 @@ function App() {
   // RESET AFTER CHANGE
 
   useEffect(() => {
-    setOptions(false)
-    setQuestionTitle('')
-    setAnswer1('')
-    setAnswer2('')
-    setAnswer3('')
-    setAnswer4('')
-    setChecked([])
-    setQuizName('')
-    setQuestions([])
-    setEditingMode(false)
-    setEditedQuestionId('')
+    if(!location.pathname.includes('edit')){
+      setOptions(false)
+      setQuestionTitle('')
+      setAnswer1('')
+      setAnswer2('')
+      setAnswer3('')
+      setAnswer4('')
+      setChecked([])
+      setQuizName('')
+      setQuestions([])
+      setEditingMode(false)
+      setEditedQuestionId('')
+    }
+  
   }, [location])
 
   function handleEditQuizItems(quiz){
     setQuizName(quiz.quizName)
     setQuestions(quiz.objects)
   }
+  
 
   return (
     
@@ -228,6 +251,8 @@ function App() {
         limit={limit}
         quizes={quizes}
         DeleteQuiz={DeleteQuiz}
+        handleEditQuiz={handleEditQuiz}
+        handleEnterEditQuiz={handleEnterEditQuiz}
         >
         </Quizes>
       }>

@@ -4,31 +4,19 @@ import EditHeader from './EditHeader';
 import CreateQuestion from './CreateQuestion';
 import QuestionList from './QuestionList';
 import { useEffect } from 'react';
+import Error from '../Error';
 
-function EditQuiz({handleEditQuizItems, checked, handleEditQuiz, quizes, handleDeleteQuestion, showQuestion, questions, EditingMode, handleNewQuestion, handleCheckedAnswer, handleQuizName, quizName, questionTitle, handleEditQuestion, handleQuestionTitle, Answer1, Answer2, Answer3, Answer4, handleAnswerChange}){
+function EditQuiz({checked, handleEditQuiz, quizes, handleDeleteQuestion, showQuestion, questions, EditingMode, handleNewQuestion, handleCheckedAnswer, handleQuizName, quizName, questionTitle, handleEditQuestion, handleQuestionTitle, Answer1, Answer2, Answer3, Answer4, handleAnswerChange}){
 
     const { id } = useParams()
 
     const Quiz = quizes.find((quiz) => quiz.id == id)
 
-    useEffect(() => {
-
-        if(Quiz){
-            handleEditQuizItems(Quiz)
-            console.log("Successfully loaded")
-        }
-        else{
-            console.log("Error")
-        }
-        
-
-    }, [Quiz])
-
-    console.log(Quiz)
-    
-
     return(
-        <div className={styles.CreateContainer}>
+        <>
+        
+        
+        {Quiz &&  <div className={styles.CreateContainer}>
             <EditHeader 
                 handleQuizName={handleQuizName}
                 quizName={quizName} 
@@ -59,7 +47,14 @@ function EditQuiz({handleEditQuizItems, checked, handleEditQuiz, quizes, handleD
              handleDeleteQuestion={handleDeleteQuestion}
 
             ></QuestionList>
-        </div>)
+        </div>}
+
+        {!Quiz && <Error></Error>}
+        
+        
+        
+        </>
+       )
 }
 
 export default EditQuiz
