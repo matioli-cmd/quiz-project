@@ -18,6 +18,7 @@ function App() {
   const [showOptions, setOptions] = useState(false)
   const storage = localStorage.getItem('Quizes')
   const [quizes, setQuizes] = useState(storage ? JSON.parse(storage) : [])
+  const [searchResults, setSearchResults] = useState('')
 
   useEffect(() => {
     localStorage.setItem('Quizes', JSON.stringify(quizes))
@@ -66,7 +67,7 @@ function App() {
   }
 
   function handleNewQuiz(){
-    if(questions.length > 0 && quizName){
+    if(questions.length > 0 && quizName.trim() != ''){
       setQuizes(s => [...s, {'id':  quizes.length > 0 ? quizes[quizes.length - 1].id + 1 : 0,
  'quizName': quizName, objects: questions}])
     
@@ -97,7 +98,7 @@ function App() {
   }
 
   function handleNewQuestion(){
-    if(questionTitle && Answer1 && Answer2 && Answer3 && Answer4 && checked.length > 0){
+    if(questionTitle.trim() != '' && Answer1.trim() != '' && Answer2.trim() != '' && Answer3.trim() != '' && Answer4.trim() != '' && checked.length > 0){
       setQuestions(s => [...s, {'id': questions.length > 0 ? questions[questions.length - 1].id + 1 : 0,
         'title': questionTitle, 
         'answers':[Answer1, Answer2, Answer3, Answer4], 
@@ -156,7 +157,7 @@ function App() {
 
     const id = quiz.id
     
-    if(questions.length > 0 && quizName){
+    if(questions.length > 0 && quizName.trim() != ''){
     setQuizes(quizes.map(q => q.id == id ? {...{'id': id,
       'quizName': quizName, objects: questions}} : q))
     setEditingMode(false)
@@ -180,7 +181,7 @@ function App() {
       'answers':[Answer1, Answer2, Answer3, Answer4], 
       'correct':checked}
 
-    if(questionTitle && Answer1 && Answer2 && Answer3 && Answer4 && checked.length > 0){
+    if(questionTitle.trim() != '' && Answer1.trim() != '' && Answer2.trim() != '' && Answer3.trim() != '' && Answer4.trim() != '' && checked.length > 0){
 
     setQuestions(questions.map(q => q.id == question.id ? {...edited_info} : q))
     setEditingMode(false)
@@ -219,6 +220,7 @@ function App() {
       setQuestions([])
       setEditingMode(false)
       setEditedQuestionId('')
+      setSearchResults('')
     }
   
   }, [location])
@@ -249,10 +251,12 @@ function App() {
         handleMobileOptions={handleMobileOptions}
         showOptions={showOptions}
         limit={limit}
-        quizes={quizes}
+        quizes={searchResults.trim() != '' ? quizes.filter((quiz) => quiz.quizName.toLowerCase().includes(searchResults.trim().toLowerCase())) : quizes}
         DeleteQuiz={DeleteQuiz}
         handleEditQuiz={handleEditQuiz}
         handleEnterEditQuiz={handleEnterEditQuiz}
+        searchResults={searchResults}
+        setSearchResults={setSearchResults}
         >
         </Quizes>
       }>

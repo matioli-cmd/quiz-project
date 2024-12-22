@@ -1,8 +1,17 @@
 import { Link } from 'react-router-dom'
 import styles from './Create.module.css'
+import { useEffect, useState } from 'react'
 
 
-function CreateHeader({quizName, handleQuizName, handleNewQuiz}){
+function CreateHeader({quizName, handleQuizName, handleNewQuiz, questions}){
+    
+    const [saveButtonClass, setSaveButtonClass] = useState('') 
+
+    useEffect(() => {
+        quizName.trim() != '' && questions.length > 0 ? setSaveButtonClass(styles.SaveButton) : setSaveButtonClass(styles.SaveButtonInactive)
+    }, [quizName, questions])
+    
+    
     return(
         <header className={styles.CreateHeader}>
         
@@ -23,15 +32,12 @@ function CreateHeader({quizName, handleQuizName, handleNewQuiz}){
             </div>
         </Link>
 
-            <div className={styles.SaveButton} onClick={handleNewQuiz}>
+            <div className={saveButtonClass} onClick={handleNewQuiz}>
 
             <h1>Save</h1>
 
             </div>
         
-      
-       
-
         </div>
       
 

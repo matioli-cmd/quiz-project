@@ -202,7 +202,7 @@ html, body {
     justify-content: center;
     bottom: 0;
     left: 0;
-    height: 140px;
+    height: 160px;
     width: 100%;
     background-color: rgb(20, 20, 21);
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
@@ -229,6 +229,24 @@ html, body {
 
 .AnswerInput::placeholder{
     color: white;
+}
+
+.SaveButtonInactive{
+    color: white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: rgb(150, 151, 152);
+    padding: 5px;
+    margin-right: 10px;
+    border-radius: 5px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    width: 100px;
+    font-size: 15px;
+    cursor:not-allowed;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .addQuestion{
@@ -313,16 +331,17 @@ html, body {
 }
 .Questions {
     display: flex;
-    flex-wrap: wrap;        
-    justify-content: center; 
-    gap: 10px;               
+    justify-content: center;
+    gap: 10px;
     width: 100%;
+    overflow-x: auto; /* Enables horizontal scrolling */
+    white-space: nowrap; /* Prevents wrapping of items */
 }
 
 .QuestionItem {
     color: black;
     background-color: white;
-    padding: 10px 15px;
+    padding: 5px 10px;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -349,6 +368,9 @@ html, body {
         font-size: 21px;
         width: 100px;
     }
+    .QuestionItem{
+        padding: 5px 10px;
+    }
     .addQuestion{
         width: auto
     }
@@ -359,6 +381,12 @@ html, body {
         height: 36px;
     }
     .BackButton{
+        font-size: 12px;
+        padding: 1px;
+        width: 76px;
+        height: 36px;
+    }
+    .SaveButtonInactive{
         font-size: 12px;
         padding: 1px;
         width: 76px;

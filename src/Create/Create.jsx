@@ -9,6 +9,7 @@ function Create({checked, handleDeleteQuestion, handleNewQuiz, showQuestion, que
         <div className={styles.CreateContainer}>
             <CreateHeader handleQuizName={handleQuizName}
                 quizName={quizName} 
+                questions={questions}
                 handleNewQuiz={handleNewQuiz}
            
                 />

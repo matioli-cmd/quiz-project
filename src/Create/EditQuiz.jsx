@@ -22,6 +22,7 @@ function EditQuiz({checked, handleEditQuiz, quizes, handleDeleteQuestion, showQu
                 quizName={quizName} 
                 handleEditQuiz={handleEditQuiz}
                 Quiz={Quiz}
+                questions={questions}
            
                 />
             <CreateQuestion checked={checked} 

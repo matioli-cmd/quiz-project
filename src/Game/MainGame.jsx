@@ -142,7 +142,7 @@ function MainGame({quizes, width, limit, handleMobileOptions, showOptions}){
 
             {Quiz && !ShowAnswers && !GameOver && !Loading &&(
             <>
-                       <GameHeader Score={Score} />
+                       <GameHeader Quiz={Quiz} currentQuestion={currentQuestion} GameOver={GameOver}/>
                 <div className={styles.PageContainer}>
                 <div className={styles.QuestionTitle}>
                     <h1>{Quiz.objects[currentQuestion].title}</h1>
@@ -170,7 +170,7 @@ function MainGame({quizes, width, limit, handleMobileOptions, showOptions}){
             {Quiz && ShowAnswers && !GameOver && !Loading &&(
 
             <>
-                   <GameHeader Score={Score} />
+                   <GameHeader Quiz={Quiz} currentQuestion={currentQuestion} GameOver={GameOver}/>
                 <div className={styles.PageContainer}>
                 <div className={styles.QuestionTitle}>
                     <h1>{Quiz.objects[currentQuestion].title}</h1>
@@ -180,25 +180,25 @@ function MainGame({quizes, width, limit, handleMobileOptions, showOptions}){
                     <div className={styles.ShowingAnswer1} style={{backgroundColor: Quiz.objects[currentQuestion].correct.includes("Answer1") ? 'rgb(50, 173, 75)' : incorrectAnswer('Answer1')}}>
                         <h1>{Quiz.objects[currentQuestion].answers[0]}</h1>
                         {!Quiz.objects[currentQuestion].correct.includes("Answer1") ? <FaXmark className={styles.XMark}></FaXmark>
-                        : <FaCheck className={styles.XMark}></FaCheck>
+                        : <FaCheck className={styles.Checkmark}></FaCheck>
                     }
                     </div>
                     <div className={styles.ShowingAnswer2} style={{backgroundColor: Quiz.objects[currentQuestion].correct.includes("Answer2") ? 'rgb(50, 173, 75)' : incorrectAnswer('Answer2')}} >
                         <h1>{Quiz.objects[currentQuestion].answers[1]}</h1>
                         {!Quiz.objects[currentQuestion].correct.includes("Answer2") ? <FaXmark className={styles.XMark}></FaXmark>
-                        : <FaCheck className={styles.XMark}></FaCheck>
+                        : <FaCheck className={styles.Checkmark}></FaCheck>
                     }
                     </div>
                     <div className={styles.ShowingAnswer3} style={{backgroundColor: Quiz.objects[currentQuestion].correct.includes("Answer3") ? 'rgb(50, 173, 75)' : incorrectAnswer('Answer3')}}>
                         <h1>{Quiz.objects[currentQuestion].answers[2]}</h1>
                         {!Quiz.objects[currentQuestion].correct.includes("Answer3") ? <FaXmark className={styles.XMark}></FaXmark>
-                        : <FaCheck className={styles.XMark}></FaCheck>
+                        : <FaCheck className={styles.Checkmark}></FaCheck>
                     }
                     </div>
                     <div className={styles.ShowingAnswer4} style={{backgroundColor: Quiz.objects[currentQuestion].correct.includes("Answer4") ? 'rgb(50, 173, 75)' : incorrectAnswer('Answer4')}}>
                         <h1>{Quiz.objects[currentQuestion].answers[3]}</h1>
                         {!Quiz.objects[currentQuestion].correct.includes("Answer4") ? <FaXmark className={styles.XMark}></FaXmark>
-                        : <FaCheck className={styles.XMark}></FaCheck>
+                        : <FaCheck className={styles.Checkmark}></FaCheck>
                     }
                     </div>
                     </div>
@@ -209,7 +209,7 @@ function MainGame({quizes, width, limit, handleMobileOptions, showOptions}){
 
             {Quiz && GameOver && !Loading &&
             <>  
-                   <GameHeader Score={Score} />
+                   <GameHeader Quiz={Quiz} currentQuestion={currentQuestion} GameOver={GameOver}/>
 
                 <div className={styles.ResultsContainer}>
                 <div className={styles.Results}>

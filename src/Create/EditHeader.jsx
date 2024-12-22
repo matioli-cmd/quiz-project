@@ -1,8 +1,17 @@
 import { Link } from 'react-router-dom'
 import styles from './Create.module.css'
+import { useState, useEffect } from 'react'
 
 
-function EditHeader({Quiz, quizName, handleQuizName, handleEditQuiz}){
+function EditHeader({Quiz, quizName, handleQuizName, handleEditQuiz, questions}){
+
+    const [saveButtonClass, setSaveButtonClass] = useState('') 
+
+    useEffect(() => {
+        quizName.trim() != '' && questions.length > 0 ? setSaveButtonClass(styles.SaveButton) : setSaveButtonClass(styles.SaveButtonInactive)
+    }, [quizName, questions])
+    
+
     return(
         <header className={styles.CreateHeader}>
         
@@ -26,7 +35,7 @@ function EditHeader({Quiz, quizName, handleQuizName, handleEditQuiz}){
     </Link>
 
     
-            <div className={styles.SaveButton} onClick={() => handleEditQuiz(Quiz)}>
+            <div className={saveButtonClass} onClick={() => handleEditQuiz(Quiz)}>
 
             <h1>Save</h1>
 

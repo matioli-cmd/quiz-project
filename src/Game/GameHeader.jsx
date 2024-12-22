@@ -1,14 +1,21 @@
 import styles from './MainGame.module.css'
 
-function GameHeader({Score}){
+function GameHeader({currentQuestion, Quiz, GameOver}){
+
+    const questionNumber = currentQuestion += 1
+
     return(
+
+
+
         <header className="Header">
+
                
-        <div className={styles.Score}>
+        {!GameOver && <div className={styles.Score}>
 
-            <h1>Score: {Score}</h1>
+            <h1>Question {questionNumber}/{Quiz.objects.length}</h1>
 
-        </div>
+        </div>}
 
     </header>
     )
