@@ -2,7 +2,7 @@ import Header from '/src/Header.jsx'
 import MobileHeader from '/src/MobileHeader.jsx'
 import QuizList from './Quizlist'
 
-function Quizes({handleMobileOptions, width, showOptions, limit, quizes, DeleteQuiz, handleEditQuiz, handleEnterEditQuiz, searchResults, setSearchResults}){
+function Quizes({handleMobileOptions, width, showOptions, limit, quizes, filteredQuizes, DeleteQuiz, handleEditQuiz, handleEnterEditQuiz, searchResults, setSearchResults}){
     return(
         <>
         
@@ -16,13 +16,13 @@ function Quizes({handleMobileOptions, width, showOptions, limit, quizes, DeleteQ
         <div>
             <h1 className='QuizListTitle'>My quizes</h1>
 
-            <div className='SearchBar'>
+            {quizes.length > 0 && <div className='SearchBar'>
 
                 <input value={searchResults} onChange={(e) => setSearchResults(e.target.value)} placeholder='Search quizes'></input>
 
-            </div>
+            </div>}
             
-            <QuizList searchResults={searchResults} handleEnterEditQuiz={handleEnterEditQuiz} handleEditQuiz={handleEditQuiz} quizes={quizes} width={width} DeleteQuiz={DeleteQuiz}></QuizList>
+            <QuizList searchResults={searchResults} handleEnterEditQuiz={handleEnterEditQuiz} handleEditQuiz={handleEditQuiz} filteredQuizes={filteredQuizes} width={width} DeleteQuiz={DeleteQuiz}></QuizList>
 
         </div>
 

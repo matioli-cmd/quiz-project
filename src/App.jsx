@@ -229,8 +229,9 @@ function App() {
     setQuizName(quiz.quizName)
     setQuestions(quiz.objects)
   }
-  
 
+  const filteredQuizes = searchResults.trim() != '' ? quizes.filter((quiz) => quiz.quizName.toLowerCase().includes(searchResults.trim().toLowerCase())) : quizes
+  
   return (
     
     <>
@@ -251,7 +252,8 @@ function App() {
         handleMobileOptions={handleMobileOptions}
         showOptions={showOptions}
         limit={limit}
-        quizes={searchResults.trim() != '' ? quizes.filter((quiz) => quiz.quizName.toLowerCase().includes(searchResults.trim().toLowerCase())) : quizes}
+        quizes={quizes}
+        filteredQuizes={filteredQuizes}
         DeleteQuiz={DeleteQuiz}
         handleEditQuiz={handleEditQuiz}
         handleEnterEditQuiz={handleEnterEditQuiz}
