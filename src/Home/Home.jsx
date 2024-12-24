@@ -1,6 +1,7 @@
 import styles from './Home.module.css'
 import Header from '/src/Header.jsx'
 import MobileHeader from '/src/MobileHeader.jsx'
+import Swal from 'sweetalert2'
 
 function Home({width, limit, handleMobileOptions, showOptions}){
 

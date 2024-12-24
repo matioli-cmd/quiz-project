@@ -6,6 +6,7 @@ import MainGame from './Game/MainGame'
 import Missing from './Missing'
 import EditQuiz from './Create/EditQuiz'
 import Error from './Error'
+import Swal from 'sweetalert2';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 
 function App() {
@@ -73,6 +74,7 @@ function App() {
     
     Navigate('/quiz-project/quizes')
 
+
 }
   }
 
@@ -110,8 +112,32 @@ function App() {
   }
 
   function DeleteQuiz(id){
-    const FilteredQuizes = quizes.filter((quiz) => quiz.id != id)
-    setQuizes(FilteredQuizes)
+    const Quiz = quizes.find(quiz => quiz.id == id)
+     Swal.fire({
+            title: `Are you sure you want to delete ${Quiz.quizName}?`,
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: "Save",
+            denyButtonText: `Don't save`,
+            customClass: {
+              title: "styleTitle",
+              confirmButtonText: "styleTitle",
+              denyButtonText: "styleTitle",
+              popup: "styleBackground"
+            },
+          }).then((result) => {
+            if (result.isConfirmed) {
+              const FilteredQuizes = quizes.filter((quiz) => quiz.id != id)
+              setQuizes(FilteredQuizes)
+              Swal.fire({
+                title: "Successfully deleted",
+                customClass: {
+                  title: "styleTitle",
+                   popup: "styleBackground"
+                },
+              });
+            }
+          });
   }
 
   function showQuestion(question){
