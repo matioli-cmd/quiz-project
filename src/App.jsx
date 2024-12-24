@@ -115,27 +115,18 @@ function App() {
     const Quiz = quizes.find(quiz => quiz.id == id)
      Swal.fire({
             title: `Are you sure you want to delete ${Quiz.quizName}?`,
-            showDenyButton: true,
             showCancelButton: true,
-            confirmButtonText: "Save",
-            denyButtonText: `Don't save`,
+            confirmButtonText: "Delete",
             customClass: {
               title: "styleTitle",
               confirmButtonText: "styleTitle",
-              denyButtonText: "styleTitle",
               popup: "styleBackground"
             },
           }).then((result) => {
             if (result.isConfirmed) {
               const FilteredQuizes = quizes.filter((quiz) => quiz.id != id)
               setQuizes(FilteredQuizes)
-              Swal.fire({
-                title: "Successfully deleted",
-                customClass: {
-                  title: "styleTitle",
-                   popup: "styleBackground"
-                },
-              });
+              
             }
           });
   }
