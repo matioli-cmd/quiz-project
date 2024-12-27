@@ -119,7 +119,7 @@ function App() {
             confirmButtonText: "Delete",
             customClass: {
               title: "styleTitle",
-              confirmButtonText: "styleTitle",
+              confirmButton: "deleteTitle",
               popup: "styleBackground"
             },
           }).then((result) => {

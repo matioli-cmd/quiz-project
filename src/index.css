@@ -213,6 +213,10 @@ html{
   background-color: rgb(20, 20, 21);
 }
 
+.deleteTitle{
+  background-color: rgb(228, 69, 69);
+}
+
 .styleTitle{
   color: white;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
