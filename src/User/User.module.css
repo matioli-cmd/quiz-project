@@ -1,0 +1,80 @@
+.Background {
+    display: flex;
+    background-color: rgb(20, 20, 21);
+    padding: 20px;
+    width: 400px;
+    align-items: center;
+    height: 450px;
+    border-radius: 8px;
+    border: rgb(147, 147, 147) solid 0.6px;
+    color: white;
+    flex-direction: column;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.Title{
+    margin-top: 20px;
+}
+
+.Button{
+    padding: 10px 30px;
+    margin-top: 0px;
+    border: none;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    font-size: 30px;
+    color: rgb(0, 0, 0);
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.Button:hover{
+    background-color: rgb(217, 217, 217);
+}
+
+.Button:active{
+    background-color: rgb(255, 255, 255);
+}
+
+.Link{
+    font-size: 18px;
+    color: white;
+    margin: 20px;
+}
+
+.LinkDecoration{
+    color: rgb(74, 148, 245);
+}
+
+.Title2{
+    color: rgb(180, 174, 174);
+    font-size: 20px;
+    margin: 10px;
+}
+
+.InputContainer{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    gap: 30px
+    ;
+}
+
+.Input{
+    padding: 20px 40px;
+    font-size: 20px;
+    border-radius: 5px;
+    border: none;
+    text-align: center;
+    outline-style: none;
+
+
+}
+
+.Container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 85vh;
+}

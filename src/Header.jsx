@@ -3,6 +3,7 @@ import { FaPlay } from "react-icons/fa6";
 import { GiWizardFace } from "react-icons/gi";
 import { Link } from "react-router-dom";
 import { RiHomeSmileFill } from "react-icons/ri";
+import { CgLogIn } from "react-icons/cg";
 
 function Header(){
     return(
@@ -47,6 +48,15 @@ function Header(){
 
                     <FaPlay></FaPlay>
                     <h1>My Quizes</h1>
+                    
+                </div>
+                </Link>
+
+                <Link className="linkDecoration"  to='/quiz-project/login'>
+                <div className="Link">
+
+                    <CgLogIn></CgLogIn>
+                    <h1>Login</h1>
                     
                 </div>
                 </Link>

@@ -7,13 +7,15 @@ import Missing from './Missing'
 import EditQuiz from './Create/EditQuiz'
 import Error from './Error'
 import Swal from 'sweetalert2';
+import Login from './User/Login'
+import Register from './User/Register'
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 
 function App() {
 
   const Navigate = useNavigate()
 
-  const limit = 700
+  const limit = 800
 
   const [width, setwidth] = useState(window.innerWidth)
   const [showOptions, setOptions] = useState(false)
@@ -334,6 +336,9 @@ function App() {
       />}>
 
       </Route>
+
+      <Route path='/quiz-project/login' element={<Login width={width} limit={limit} handleMobileOptions={handleMobileOptions} showOptions={showOptions}/>}></Route>
+      <Route path='/quiz-project/register' element={<Register width={width} limit={limit} handleMobileOptions={handleMobileOptions} showOptions={showOptions}/>}></Route>
 
       <Route path='/quiz-project/edit/:id' element={<EditQuiz
        handleCheckedAnswer={handleCheckedAnswer} 

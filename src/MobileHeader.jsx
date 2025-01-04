@@ -4,6 +4,7 @@ import { GiWizardFace } from "react-icons/gi";
 import { FaBars } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { RiHomeSmileFill } from "react-icons/ri";
+import { CgLogIn } from "react-icons/cg";
 
 function MobileHeader({handleMobileOptions, showOptions}){
     return(
@@ -41,6 +42,9 @@ function MobileHeader({handleMobileOptions, showOptions}){
                         </Link>
                         <Link className="linkDecoration"  to='/quiz-project/quizes'>
                             <h1 className="MobileLink"><FaPlay></FaPlay>My Quizes</h1>
+                        </Link>
+                        <Link className="linkDecoration"  to='/quiz-project/login'>
+                            <h1 className="MobileLink"><CgLogIn></CgLogIn>Login</h1>
                         </Link>
                        
 
