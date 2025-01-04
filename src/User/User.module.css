@@ -80,6 +80,11 @@
 }
 
 @media screen and (max-width: 600px) {
+
+    .Container{
+        height: 78vh;
+    }
+
    .Background{
     width: auto;
     padding: 25px 45px;
