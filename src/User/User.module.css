@@ -62,8 +62,8 @@
 }
 
 .Input{
-    padding: 20px 40px;
-    font-size: 20px;
+    padding: 15px 20px;
+    font-size: 24px;
     border-radius: 5px;
     border: none;
     text-align: center;
@@ -78,3 +78,25 @@
     justify-content: center;
     height: 85vh;
 }
+
+@media screen and (max-width: 600px) {
+   .Background{
+    width: auto;
+    padding: 25px 45px;
+    height: 420px;
+
+   }
+   .Input{
+    width: auto;
+    padding: 10px 5px;
+    font-size: 20px;
+   }
+    
+   h1{
+    font-size: 29px;
+   }
+  
+  
+  }
+  
+  
