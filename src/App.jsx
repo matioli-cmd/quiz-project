@@ -79,7 +79,7 @@ function App() {
   function handleLogin(username, password){
 
     async function loginUser(){
-      const response = await fetch('http://localhost:3500/auth', {
+      const response = await fetch('https://291c-174-17-168-149.ngrok-free.app/auth', {
         method: "POST",
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({"user": username, "pass": password})
@@ -100,7 +100,7 @@ function App() {
 
   function handleRegister(username, password){
     async function registerUser(){
-      const response = await fetch('http://localhost:3500/register', {
+      const response = await fetch('https://291c-174-17-168-149.ngrok-free.app/register', {
         method: "POST",
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({"user": username, "pass": password})
@@ -118,7 +118,7 @@ function App() {
 
   function handleLogOut(){
     async function logoutUser(){
-      const response = await fetch('http://localhost:3500/logout', {
+      const response = await fetch('https://291c-174-17-168-149.ngrok-free.app/logout', {
         method: "GET",
         credentials: 'include'
       })
