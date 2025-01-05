@@ -119,8 +119,7 @@ function App() {
   function handleLogOut(){
     async function logoutUser(){
       const response = await fetch('https://291c-174-17-168-149.ngrok-free.app/logout', {
-        method: "GET",
-        credentials: 'include'
+        method: "GET"
       })
       if(response.ok){
         localStorage.removeItem('loggedin')
