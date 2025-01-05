@@ -2,8 +2,21 @@ import styles from './Create.module.css';
 import CreateHeader from './CreateHeader';
 import CreateQuestion from './CreateQuestion';
 import QuestionList from './QuestionList';
+import { useContext, useEffect } from "react";
+import {loggedInContext} from '../App'
+import { useNavigate } from 'react-router-dom';
+
 
 function Create({checked, handleDeleteQuestion, handleNewQuiz, showQuestion, questions, EditingMode, handleNewQuestion, handleCheckedAnswer, handleQuizName, quizName, questionTitle, handleEditQuestion, handleQuestionTitle, Answer1, Answer2, Answer3, Answer4, handleAnswerChange}) {
+
+    const loggedin = useContext(loggedInContext)
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if(!loggedin.Status){
+            navigate('/quiz-project/login')
+        }
+    }, [])
 
     return (
         <div className={styles.CreateContainer}>

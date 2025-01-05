@@ -5,8 +5,9 @@ import { FaBars } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { RiHomeSmileFill } from "react-icons/ri";
 import { CgLogIn } from "react-icons/cg";
+import { CgLogOut } from "react-icons/cg";
 
-function MobileHeader({handleMobileOptions, showOptions}){
+function MobileHeader({handleMobileOptions, showOptions, loggedIn, handleLogOut}){
     return(
         <header className="Header">
 
@@ -34,18 +35,32 @@ function MobileHeader({handleMobileOptions, showOptions}){
             <div className="Links">
                     
                     <div>
-                        <Link className="linkDecoration"  to={`/quiz-project`}>
+                    <Link className="linkDecoration"  to={`/quiz-project`}>
                             <h1 className="MobileLink"><RiHomeSmileFill/>Home</h1>
                         </Link>
+                        
+                        {loggedIn.Status &&  
                         <Link className="linkDecoration" to={'/quiz-project/create'}>
                             <h1 className="MobileLink"><FaPlusSquare></FaPlusSquare>Create</h1>
-                        </Link>
-                        <Link className="linkDecoration"  to='/quiz-project/quizes'>
+                        </Link>}
+                        
+                        {loggedIn.Status && <Link className="linkDecoration"  to='/quiz-project/quizes'>
                             <h1 className="MobileLink"><FaPlay></FaPlay>My Quizes</h1>
+                        </Link>}
+
+                        {!loggedIn.Status ? 
+                     <Link className="linkDecoration"  to='/quiz-project/login'>
+                       
+                        <h1 className="MobileLink"><CgLogIn></CgLogIn>Login</h1>
+                      
+                      </Link>
+                       
+                    :  <Link className="linkDecoration"  to='/quiz-project/'>
+
+                        <h1 className="MobileLink" onClick={handleLogOut}><CgLogOut></CgLogOut>Logout</h1>
+                   
                         </Link>
-                        <Link className="linkDecoration"  to='/quiz-project/login'>
-                            <h1 className="MobileLink"><CgLogIn></CgLogIn>Login</h1>
-                        </Link>
+                    }
                        
 
                     </div>

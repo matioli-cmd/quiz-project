@@ -10,6 +10,9 @@ import Swal from 'sweetalert2';
 import Login from './User/Login'
 import Register from './User/Register'
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
+import { createContext } from 'react'
+import LayoutWithHeader from './LayoutWithHeader'
+export const loggedInContext = createContext({Status: false, Username: ''});
 
 function App() {
 
@@ -22,6 +25,10 @@ function App() {
   const storage = localStorage.getItem('Quizes')
   const [quizes, setQuizes] = useState(storage ? JSON.parse(storage) : [])
   const [searchResults, setSearchResults] = useState('')
+  
+  // USER
+  const previousLoggedIn = localStorage.getItem('loggedin')
+  const [loggedIn, setLoggedIn] = useState(!previousLoggedIn ? {Status: false, Username: ''}: JSON.parse(previousLoggedIn))
 
   useEffect(() => {
     localStorage.setItem('Quizes', JSON.stringify(quizes))
@@ -67,6 +74,60 @@ function App() {
 
   function handleQuizName(e){
     setQuizName(e.target.value)
+  }
+
+  function handleLogin(username, password){
+
+    async function loginUser(){
+      const response = await fetch('http://localhost:3500/auth', {
+        method: "POST",
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({"user": username, "pass": password})
+      })
+      const data = await response.json()
+      console.log(data)
+
+      if(response.status == 201){
+         localStorage.setItem('loggedin', JSON.stringify({'Status': true, 'Username': username}))
+         setLoggedIn({Status: true, Username: username})
+         Navigate('/quiz-project/')
+         console.log(loggedIn)
+      }
+      
+    }
+    loginUser()
+    }
+
+  function handleRegister(username, password){
+    async function registerUser(){
+      const response = await fetch('http://localhost:3500/register', {
+        method: "POST",
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({"user": username, "pass": password})
+      })
+      const data = await response.json()
+      console.log(data)
+
+      if(response.status == 201){
+        Navigate('/quiz-project/login')
+      }
+      
+    }
+    registerUser()
+  }
+
+  function handleLogOut(){
+    async function logoutUser(){
+      const response = await fetch('http://localhost:3500/logout', {
+        method: "GET",
+        credentials: 'include'
+      })
+      if(response.ok){
+        localStorage.removeItem('loggedin')
+        setLoggedIn({Status: false, Username: ''})
+      }
+    }
+    logoutUser()
   }
 
   function handleNewQuiz(){
@@ -252,124 +313,180 @@ function App() {
   const filteredQuizes = searchResults.trim() != '' ? quizes.filter((quiz) => quiz.quizName.toLowerCase().includes(searchResults.trim().toLowerCase())) : quizes
   
   return (
-    
     <>
+      <loggedInContext.Provider value={loggedIn}>
+        <Routes>
+  
+          {/* LayoutWithHeader wraps this route and provides the header */}
+          <Route path='/quiz-project/' element={<>
+            <LayoutWithHeader 
+              loggedIn={loggedIn} 
+              handleMobileOptions={handleMobileOptions}
+              showOptions={showOptions}
+              width={width} 
+              handleLogOut={handleLogOut}
+              limit={limit}
+            />
+              <Home 
+                width={width} 
+                handleMobileOptions={handleMobileOptions}
+                showOptions={showOptions}
+                limit={limit}
+                loggedIn={loggedIn}
+              />
+          
+          
+          </>
 
-    <Routes>
+          } />
+  
+          {/* LayoutWithHeader wraps this route and provides the header */}
+          <Route path='/quiz-project/quizes' element={
+            <>
+            <LayoutWithHeader 
+              loggedIn={loggedIn} 
+              handleMobileOptions={handleMobileOptions}
+              showOptions={showOptions}
+              width={width} 
+              handleLogOut={handleLogOut}
+              limit={limit}
+            />
+              <Quizes 
+                width={width} 
+                handleMobileOptions={handleMobileOptions}
+                showOptions={showOptions}
+                limit={limit}
+                quizes={quizes}
+                filteredQuizes={filteredQuizes}
+                DeleteQuiz={DeleteQuiz}
+                handleEditQuiz={handleEditQuiz}
+                handleEnterEditQuiz={handleEnterEditQuiz}
+                searchResults={searchResults}
+                setSearchResults={setSearchResults}
+              />
+              </>
+          } />
+  
+          {/* No header */}
+          <Route path='/quiz-project/play/:id' element={<MainGame 
+            quizes={quizes}
+            width={width} 
+            handleMobileOptions={handleMobileOptions}
+            showOptions={showOptions}
+            limit={limit}
+          />} />
+  
+          {/* No header */}
+          <Route path='/quiz-project/create' element={<Create 
+            handleCheckedAnswer={handleCheckedAnswer} 
+            checked={checked}
+            quizName={quizName}
+            questionTitle={questionTitle}
+            handleQuestionTitle={handleQuestionTitle}
+            handleQuizName={handleQuizName}
+            questions={questions}
+            handleNewQuestion={handleNewQuestion}
+            Answer1={Answer1}
+            Answer2={Answer2}
+            Answer3={Answer3}
+            Answer4={Answer4}
+            handleAnswerChange={handleAnswerChange}
+            handleEditQuestion={handleEditQuestion}
+            EditingMode={EditingMode}
+            showQuestion={showQuestion}
+            handleNewQuiz={handleNewQuiz}
+            handleDeleteQuestion={handleDeleteQuestion}
+          />} />
+  
+  
+          {/* LayoutWithHeader wraps this route and provides the header */}
+          <Route path='*' element={
+              <>
+            
+              <Missing 
+                width={width} 
+                handleMobileOptions={handleMobileOptions}
+                showOptions={showOptions}
+                limit={limit}
+              />
 
-      <Route path='/quiz-project' element={
-        <Home width={width} 
-        handleMobileOptions={handleMobileOptions}
-        showOptions={showOptions}
-        limit={limit}
-        ></Home>
-      }></Route>
-
-      <Route path='/quiz-project/quizes' element={
-        <Quizes 
-        width={width} 
-        handleMobileOptions={handleMobileOptions}
-        showOptions={showOptions}
-        limit={limit}
-        quizes={quizes}
-        filteredQuizes={filteredQuizes}
-        DeleteQuiz={DeleteQuiz}
-        handleEditQuiz={handleEditQuiz}
-        handleEnterEditQuiz={handleEnterEditQuiz}
-        searchResults={searchResults}
-        setSearchResults={setSearchResults}
-        >
-        </Quizes>
-      }>
-
-      </Route>
-
-      <Route path='/quiz-project/play/:id' element={<MainGame 
-      quizes={quizes}
-      width={width} 
-      handleMobileOptions={handleMobileOptions}
-      showOptions={showOptions}
-      limit={limit}/>}>
-
-
-      </Route>
-
-      <Route path='/quiz-project/create' element={<Create 
-      
-      handleCheckedAnswer={handleCheckedAnswer} 
-      checked={checked}
-      quizName={quizName}
-      questionTitle={questionTitle}
-      handleQuestionTitle={handleQuestionTitle}
-      handleQuizName={handleQuizName}
-      questions={questions}
-      handleNewQuestion={handleNewQuestion}
-      Answer1={Answer1}
-      Answer2={Answer2}
-      Answer3={Answer3}
-      Answer4={Answer4}
-      handleAnswerChange={handleAnswerChange}
-      handleEditQuestion={handleEditQuestion}
-      EditingMode={EditingMode}
-      showQuestion={showQuestion}
-      handleNewQuiz={handleNewQuiz}
-      handleDeleteQuestion={handleDeleteQuestion}
-      
-      />}>
-
-
-      </Route>
-
-      <Route path='/quiz-project/error' element={<Error
-      width={width} 
-      handleMobileOptions={handleMobileOptions}
-      showOptions={showOptions}
-      limit={limit}
-      />}>
-      </Route>
-
-      <Route path='*' element={<Missing
-      width={width} 
-      handleMobileOptions={handleMobileOptions}
-      showOptions={showOptions}
-      limit={limit}
-      />}>
-
-      </Route>
-
-      <Route path='/quiz-project/login' element={<Login width={width} limit={limit} handleMobileOptions={handleMobileOptions} showOptions={showOptions}/>}></Route>
-      <Route path='/quiz-project/register' element={<Register width={width} limit={limit} handleMobileOptions={handleMobileOptions} showOptions={showOptions}/>}></Route>
-
-      <Route path='/quiz-project/edit/:id' element={<EditQuiz
-       handleCheckedAnswer={handleCheckedAnswer} 
-       checked={checked}
-       quizName={quizName}
-       questionTitle={questionTitle}
-       handleQuestionTitle={handleQuestionTitle}
-       handleQuizName={handleQuizName}
-       questions={questions}
-       handleNewQuestion={handleNewQuestion}
-       Answer1={Answer1}
-       Answer2={Answer2}
-       Answer3={Answer3}
-       Answer4={Answer4}
-       handleAnswerChange={handleAnswerChange}
-       handleEditQuestion={handleEditQuestion}
-       EditingMode={EditingMode}
-       showQuestion={showQuestion}
-       handleNewQuiz={handleNewQuiz}
-       handleDeleteQuestion={handleDeleteQuestion}
-       quizes={quizes}
-        handleEditQuiz={handleEditQuiz}
-        handleEditQuizItems={handleEditQuizItems}
-      
-      />}>
-
-
-      </Route>
-
-
-    </Routes>
+            
+              </>
+          } />
+  
+          {/* LayoutWithHeader wraps this route and provides the header */}
+          <Route path='/quiz-project/login' element={
+            <>
+            
+            
+  
+            <LayoutWithHeader 
+              loggedIn={loggedIn} 
+              handleMobileOptions={handleMobileOptions}
+              showOptions={showOptions}
+              width={width} 
+              handleLogOut={handleLogOut}
+              limit={limit}
+            />
+              <Login 
+                width={width} 
+                limit={limit} 
+                handleLogin={handleLogin} 
+                handleMobileOptions={handleMobileOptions} 
+                showOptions={showOptions}
+              />
+            </>
+          } />
+  
+          {/* LayoutWithHeader wraps this route and provides the header */}
+          <Route path='/quiz-project/register' element={
+            <>
+            <LayoutWithHeader 
+              loggedIn={loggedIn} 
+              handleMobileOptions={handleMobileOptions}
+              showOptions={showOptions}
+              width={width} 
+              handleLogOut={handleLogOut}
+              limit={limit}
+            />
+              <Register 
+                width={width} 
+                limit={limit} 
+                handleRegister={handleRegister} 
+                handleMobileOptions={handleMobileOptions} 
+                showOptions={showOptions}
+              />
+          
+            </>
+          } />
+  
+          {/* No header */}
+          <Route path='/quiz-project/edit/:id' element={<EditQuiz
+            handleCheckedAnswer={handleCheckedAnswer} 
+            checked={checked}
+            quizName={quizName}
+            questionTitle={questionTitle}
+            handleQuestionTitle={handleQuestionTitle}
+            handleQuizName={handleQuizName}
+            questions={questions}
+            handleNewQuestion={handleNewQuestion}
+            Answer1={Answer1}
+            Answer2={Answer2}
+            Answer3={Answer3}
+            Answer4={Answer4}
+            handleAnswerChange={handleAnswerChange}
+            handleEditQuestion={handleEditQuestion}
+            EditingMode={EditingMode}
+            showQuestion={showQuestion}
+            handleNewQuiz={handleNewQuiz}
+            handleDeleteQuestion={handleDeleteQuestion}
+            quizes={quizes}
+            handleEditQuiz={handleEditQuiz}
+            handleEditQuizItems={handleEditQuizItems}
+          />} />
+  
+        </Routes>
+      </loggedInContext.Provider>
     </>
   )
 }

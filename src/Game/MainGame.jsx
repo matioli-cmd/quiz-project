@@ -1,14 +1,26 @@
 import styles from './MainGame.module.css'
 import GameHeader from './GameHeader'
 import {useParams } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Error from '../Error'
 import {FaXmark } from "react-icons/fa6";
 import { FaCheck } from "react-icons/fa";
 import { Link } from 'react-router-dom'
 import LoadingIcons, { ThreeDots } from 'react-loading-icons'
+import { useContext, useEffect } from "react";
+import {loggedInContext} from '../App'
+import { useNavigate } from 'react-router-dom';
 
 function MainGame({quizes, width, limit, handleMobileOptions, showOptions}){
+
+    const loggedin = useContext(loggedInContext)
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if(!loggedin.Status){
+            navigate('/quiz-project/login')
+        }
+    }, [])
 
     const { id } = useParams()
 

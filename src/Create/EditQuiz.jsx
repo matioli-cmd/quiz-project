@@ -3,10 +3,22 @@ import styles from './Create.module.css';
 import EditHeader from './EditHeader';
 import CreateQuestion from './CreateQuestion';
 import QuestionList from './QuestionList';
-import { useEffect } from 'react';
 import Error from '../Error';
+import { useContext } from "react";
+import { useEffect } from "react";
+import {loggedInContext} from '../App'
+import { useNavigate } from 'react-router-dom';
 
 function EditQuiz({checked, handleEditQuiz, quizes, handleDeleteQuestion, showQuestion, questions, EditingMode, handleNewQuestion, handleCheckedAnswer, handleQuizName, quizName, questionTitle, handleEditQuestion, handleQuestionTitle, Answer1, Answer2, Answer3, Answer4, handleAnswerChange}){
+
+    const loggedin = useContext(loggedInContext)
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if(!loggedin.Status){
+            navigate('/quiz-project/login')
+        }
+    }, [])
 
     const { id } = useParams()
 
@@ -50,7 +62,14 @@ function EditQuiz({checked, handleEditQuiz, quizes, handleDeleteQuestion, showQu
             ></QuestionList>
         </div>}
 
-        {!Quiz && <Error></Error>}
+        {!Quiz &&  <>
+
+              <Error 
+  
+              />
+           
+              
+              </>}
         
         
         

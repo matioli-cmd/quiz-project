@@ -1,16 +1,11 @@
 import Header from '/src/Header.jsx'
 import MobileHeader from '/src/MobileHeader.jsx'
 import { BiSolidError } from "react-icons/bi";
+import { Link } from 'react-router-dom';
 
-function Missing({width, limit, handleMobileOptions, showOptions}){
+function Missing(){
     return(
         <>
-        
-        {width < limit ? 
-        <MobileHeader 
-        handleMobileOptions={handleMobileOptions}
-        showOptions={showOptions}
-        /> : <Header/>}
 
         <div className='ErrorLogo'>
 
@@ -19,7 +14,7 @@ function Missing({width, limit, handleMobileOptions, showOptions}){
                 <h1>Oops, look like we hit a roadblock!</h1>
             </div>
             <div className='ErrorText2'>
-                <h1>Please return to our homepage</h1>
+                <h1>Please return to our <Link className='Link-homepage' to={'/quiz-project/'}>homepage</Link></h1>
             </div>
             
         </div>

@@ -4,18 +4,13 @@ import styles from './User.module.css'
 import { Link } from "react-router-dom"
 import { useState } from "react"
 
-function Login({width, limit, handleMobileOptions, showOptions}){
+function Login({width, limit, handleMobileOptions, showOptions, handleLogin}){
 
     const [password, setPassword] = useState('')
     const [username, setUsername] = useState('')
 
     return(
         <>
-        {width < limit ? 
-            <MobileHeader 
-            handleMobileOptions={handleMobileOptions}
-            showOptions={showOptions}
-            /> : <Header/>}
         
         <div className={styles.Container}>
             
@@ -30,7 +25,7 @@ function Login({width, limit, handleMobileOptions, showOptions}){
 
                 <h2 className={styles.Link}>New here? <Link to={'/quiz-project/register'} className={styles.LinkDecoration}>Register</Link></h2>
 
-                <button className={styles.Button}>Login</button>
+                <button className={styles.Button} onClick={() => handleLogin(username, password)}>Login</button>
               
             
             </div>
