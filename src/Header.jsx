@@ -25,7 +25,7 @@ function Header({loggedIn, handleLogOut}){
             </Link>
            
 
-            <div className="HeaderLinksItems">
+            {loggedIn.Status && <div className="HeaderLinksItems">
                 
            <Link className="linkDecoration" to={`/quiz-project`}>
                 <div className="Link">
@@ -64,7 +64,7 @@ function Header({loggedIn, handleLogOut}){
                      </div>
                       </Link>
                        
-                    :  <Link className="linkDecoration"  to='/quiz-project/'>
+                    :  <Link className="linkDecoration"  to='/quiz-project/login'>
                         <div className="Link" onClick={handleLogOut}> 
                         <CgLogOut></CgLogOut>
                         <h1>Logout</h1>
@@ -73,7 +73,7 @@ function Header({loggedIn, handleLogOut}){
                     }
                     
                 
-            </div>
+            </div>}
            
 
         </header>

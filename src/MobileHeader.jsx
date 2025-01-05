@@ -23,12 +23,12 @@ function MobileHeader({handleMobileOptions, showOptions, loggedIn, handleLogOut}
             
         </Link>
 
-            <div>
+            {loggedIn.Status && <div>
 
                 <FaBars onClick={handleMobileOptions} className="MobileBars"></FaBars>
 
                 
-            </div>
+            </div>}
 
             {showOptions &&  
             
@@ -55,7 +55,7 @@ function MobileHeader({handleMobileOptions, showOptions, loggedIn, handleLogOut}
                       
                       </Link>
                        
-                    :  <Link className="linkDecoration"  to='/quiz-project/'>
+                    :  <Link className="linkDecoration"  to='/quiz-project/login'>
 
                         <h1 className="MobileLink" onClick={handleLogOut}><CgLogOut></CgLogOut>Logout</h1>
                    

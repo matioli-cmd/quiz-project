@@ -1,9 +1,19 @@
 import styles from './Home.module.css'
-import Header from '/src/Header.jsx'
-import MobileHeader from '/src/MobileHeader.jsx'
-import Swal from 'sweetalert2'
+import { useContext } from "react";
+import { useEffect } from "react";
+import {loggedInContext} from '../App'
+import { useNavigate } from 'react-router-dom';
 
 function Home({width, limit, handleMobileOptions, showOptions, loggedIn}){
+
+    const loggedin = useContext(loggedInContext)
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if(!loggedin.Status){
+            navigate('/quiz-project/login')
+        }
+    }, [])
 
     return(
         <>
