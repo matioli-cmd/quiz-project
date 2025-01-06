@@ -49,6 +49,7 @@ function App() {
 
   function handleMobileOptions(){
     setOptions(prevstate => !prevstate)
+    
   }
 
   function handleCheckedAnswer(name){
@@ -176,7 +177,7 @@ function App() {
   function DeleteQuiz(id){
     const Quiz = quizes.find(quiz => quiz.id == id)
      Swal.fire({
-            title: `Are you sure you want to delete ${Quiz.quizName}?`,
+            title: `Are you sure you want to delete "${Quiz.quizName.trim()}"?`,
             showCancelButton: true,
             confirmButtonText: "Delete",
             customClass: {
@@ -325,6 +326,7 @@ function App() {
               width={width} 
               handleLogOut={handleLogOut}
               limit={limit}
+              setOptions={setOptions}
             />
               <Home 
                 width={width} 
@@ -349,6 +351,7 @@ function App() {
               width={width} 
               handleLogOut={handleLogOut}
               limit={limit}
+              setOptions={setOptions}
             />
               <Quizes 
                 width={width} 
@@ -373,6 +376,7 @@ function App() {
             handleMobileOptions={handleMobileOptions}
             showOptions={showOptions}
             limit={limit}
+            setOptions={setOptions}
           />} />
   
           {/* No header */}
@@ -426,6 +430,7 @@ function App() {
               width={width} 
               handleLogOut={handleLogOut}
               limit={limit}
+              setOptions={setOptions}
             />
               <Login 
                 width={width} 
@@ -447,6 +452,7 @@ function App() {
               width={width} 
               handleLogOut={handleLogOut}
               limit={limit}
+              setOptions={setOptions}
             />
               <Register 
                 width={width} 

@@ -6,12 +6,30 @@ import { Link } from "react-router-dom";
 import { RiHomeSmileFill } from "react-icons/ri";
 import { CgLogIn } from "react-icons/cg";
 import { CgLogOut } from "react-icons/cg";
+import { useRef } from "react";
+import { useEffect } from "react";
 
-function MobileHeader({handleMobileOptions, showOptions, loggedIn, handleLogOut}){
+function MobileHeader({handleMobileOptions, showOptions, setOptions, loggedIn, handleLogOut}){
+
+    const dropdownRef = useRef()
+
+    const handleClickOutside = (event) => {
+        if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+            setOptions(false);
+        }
+      };
+    
+      useEffect(() => {
+        document.addEventListener('click', handleClickOutside);
+    
+        return () => {
+          document.removeEventListener('click', handleClickOutside);
+        };
+      }, [])
+    
     return(
         <header className="Header">
 
-        <Link to='/quiz-project'>
             
             <div className="Title_Logo">
 
@@ -20,10 +38,8 @@ function MobileHeader({handleMobileOptions, showOptions, loggedIn, handleLogOut}
 
             </div>
                         
-            
-        </Link>
 
-            {loggedIn.Status && <div>
+            {loggedIn.Status && <div ref={dropdownRef}>
 
                 <FaBars onClick={handleMobileOptions} className="MobileBars"></FaBars>
 

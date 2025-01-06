@@ -12,7 +12,6 @@ function Header({loggedIn, handleLogOut}){
     return(
         <header className="Header">
             
-            <Link to='/quiz-project'>
             
             <div className="Title_Logo">
 
@@ -21,8 +20,6 @@ function Header({loggedIn, handleLogOut}){
 
             </div>
                         
-            
-            </Link>
            
 
             {loggedIn.Status && <div className="HeaderLinksItems">
