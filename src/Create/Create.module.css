@@ -64,6 +64,39 @@ html, body {
     transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
 
+.PublicButtonClass{
+    color: white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: rgb(78, 180, 88);
+    padding: 5px;
+    margin-right: 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    width: 50px;
+    font-size: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, trans
+}
+
+.PublicOffButtonClass{
+    color: white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: rgb(180, 78, 78);
+    padding: 5px;
+    margin-right: 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    width: 50px;
+    font-size: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, trans
+}
 
 .BackButton{
     color: rgb(0, 0, 0);
@@ -334,8 +367,8 @@ html, body {
     justify-content: center;
     gap: 10px;
     width: 100%;
-    overflow-x: auto; /* Enables horizontal scrolling */
-    white-space: nowrap; /* Prevents wrapping of items */
+    overflow-x: auto; 
+    white-space: nowrap; 
 }
 
 .QuestionItem {
@@ -352,7 +385,7 @@ html, body {
     background-color: rgb(208, 207, 207);
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 750px) {
     .Answer1, .Answer2, .Answer3, .Answer4 {
         min-width: 340px;
         font-size: 12px;
@@ -391,6 +424,13 @@ html, body {
         padding: 1px;
         width: 76px;
         height: 36px;
+    }
+
+    .PublicButtonClass{
+        font-size: 27px;
+    }
+    .PublicOffButtonClass{
+        font-size: 27px;
     }
 
 

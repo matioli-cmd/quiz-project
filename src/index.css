@@ -116,7 +116,7 @@ html{
   padding: 10px;             
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
   width: 170px; 
-  height: 224px;              
+  height: 250px;              
   margin: 20px auto;          
   text-align: center;       
   position: absolute;
@@ -131,9 +131,94 @@ html{
 .Links h1 {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   color: white;
-  font-size: 20px;
+  font-size: 17px;
   margin: 10px 0; 
 }
+
+.publicContainer{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.publicTitle{
+  color: white;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 25px;
+}
+
+.API {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+  background-color: #fff;
+}
+
+.attributes {
+  flex: 1;
+}
+
+.Favorite {
+  font-size: 35px;
+  color: #d73b4b;
+  cursor: pointer;
+  transition: 0.3s ease, transform 0.3s ease;
+}
+
+.API h1 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+  text-align: left;
+}
+
+.API p{
+  text-align: left;
+}
+
+.ApiItems-container {
+  display: flex; 
+  align-items: center;
+  gap: 20px; 
+  margin-top: 20px;
+  text-align: center;
+}
+
+.API {
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  background-color: white;
+  margin: 20px auto;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  max-width: 700px;
+  width: 90%;
+  height: 85px;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+.PlayButton {
+  background-color: #43b64d;
+  color: white;
+  width: 70px;
+  height: 50px;
+  font-size: 1.7rem;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+}
+
 
 .MobileLink {
   display: flex;

@@ -7,7 +7,7 @@ import {loggedInContext} from '../App'
 import { useNavigate } from 'react-router-dom';
 
 
-function Create({checked, handleDeleteQuestion, handleNewQuiz, showQuestion, questions, EditingMode, handleNewQuestion, handleCheckedAnswer, handleQuizName, quizName, questionTitle, handleEditQuestion, handleQuestionTitle, Answer1, Answer2, Answer3, Answer4, handleAnswerChange}) {
+function Create({checked, handleDeleteQuestion,Public, setPublic, handleNewQuiz, showQuestion, questions, EditingMode, handleNewQuestion, handleCheckedAnswer, handleQuizName, quizName, questionTitle, handleEditQuestion, handleQuestionTitle, Answer1, Answer2, Answer3, Answer4, handleAnswerChange}) {
 
     const loggedin = useContext(loggedInContext)
     const navigate = useNavigate()
@@ -24,6 +24,8 @@ function Create({checked, handleDeleteQuestion, handleNewQuiz, showQuestion, que
                 quizName={quizName} 
                 questions={questions}
                 handleNewQuiz={handleNewQuiz}
+                Public={Public}
+                setPublic={setPublic}
            
                 />
             <CreateQuestion checked={checked} 

@@ -1,9 +1,12 @@
 import { Link } from 'react-router-dom'
 import styles from './Create.module.css'
 import { useState, useEffect } from 'react'
+import { MdPublic } from "react-icons/md";
+import { MdPublicOff } from "react-icons/md";
 
 
-function EditHeader({Quiz, quizName, handleQuizName, handleEditQuiz, questions}){
+
+function EditHeader({Quiz, quizName, Public, setPublic, handleQuizName, handleEditQuiz, questions}){
 
     const [saveButtonClass, setSaveButtonClass] = useState('') 
 
@@ -25,6 +28,12 @@ function EditHeader({Quiz, quizName, handleQuizName, handleEditQuiz, questions})
 
 
     <div className={styles.buttonHolder}>
+
+     <div className={Public ? styles.PublicButtonClass : styles.PublicOffButtonClass} onClick={() => setPublic(p => !p)}>
+    
+            {Public ? <MdPublic></MdPublic> : <MdPublicOff/>}
+    
+    </div>
 
     <Link to='/quiz-project/quizes' style={{textDecoration: 'none'}}>
         <div className={styles.BackButton}>

@@ -9,7 +9,7 @@ import { useEffect } from "react";
 import {loggedInContext} from '../App'
 import { useNavigate } from 'react-router-dom';
 
-function EditQuiz({checked, handleEditQuiz, quizes, handleDeleteQuestion, showQuestion, questions, EditingMode, handleNewQuestion, handleCheckedAnswer, handleQuizName, quizName, questionTitle, handleEditQuestion, handleQuestionTitle, Answer1, Answer2, Answer3, Answer4, handleAnswerChange}){
+function EditQuiz({checked, handleEditQuiz, quizes, setPublic, Public, handleDeleteQuestion, showQuestion, questions, EditingMode, handleNewQuestion, handleCheckedAnswer, handleQuizName, quizName, questionTitle, handleEditQuestion, handleQuestionTitle, Answer1, Answer2, Answer3, Answer4, handleAnswerChange}){
 
     const loggedin = useContext(loggedInContext)
     const navigate = useNavigate()
@@ -35,6 +35,8 @@ function EditQuiz({checked, handleEditQuiz, quizes, handleDeleteQuestion, showQu
                 handleEditQuiz={handleEditQuiz}
                 Quiz={Quiz}
                 questions={questions}
+                Public={Public}
+                setPublic={setPublic}
            
                 />
             <CreateQuestion checked={checked} 

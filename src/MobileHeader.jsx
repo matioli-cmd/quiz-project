@@ -8,6 +8,7 @@ import { CgLogIn } from "react-icons/cg";
 import { CgLogOut } from "react-icons/cg";
 import { useRef } from "react";
 import { useEffect } from "react";
+import { MdOutlinePublic } from "react-icons/md";
 
 function MobileHeader({handleMobileOptions, showOptions, setOptions, loggedIn, handleLogOut}){
 
@@ -58,6 +59,11 @@ function MobileHeader({handleMobileOptions, showOptions, setOptions, loggedIn, h
                         {loggedIn.Status &&  
                         <Link className="linkDecoration" to={'/quiz-project/create'}>
                             <h1 className="MobileLink"><FaPlusSquare></FaPlusSquare>Create</h1>
+                        </Link>}
+
+                        {loggedIn.Status &&  
+                        <Link className="linkDecoration" to={'/quiz-project/public'}>
+                            <h1 className="MobileLink"><MdOutlinePublic></MdOutlinePublic>Public Quizes</h1>
                         </Link>}
                         
                         {loggedIn.Status && <Link className="linkDecoration"  to='/quiz-project/quizes'>

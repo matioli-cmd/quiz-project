@@ -12,19 +12,21 @@ import Register from './User/Register'
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import { createContext } from 'react'
 import LayoutWithHeader from './LayoutWithHeader'
+import PublicQuizes from './PublicQuizes'
 export const loggedInContext = createContext({Status: false, Username: ''});
 
 function App() {
 
   const Navigate = useNavigate()
 
-  const limit = 800
+  const limit = 1000
 
   const [width, setwidth] = useState(window.innerWidth)
   const [showOptions, setOptions] = useState(false)
   const storage = localStorage.getItem('Quizes')
   const [quizes, setQuizes] = useState(storage ? JSON.parse(storage) : [])
   const [searchResults, setSearchResults] = useState('')
+  const [publicSearchResults, setPublicSearchResults] = useState('')
   
   // USER
   const previousLoggedIn = localStorage.getItem('loggedin')
@@ -46,6 +48,7 @@ function App() {
   const [Answer4, setAnswer4] = useState('')
   const [EditingMode, setEditingMode] = useState(false)
   const [EditedQuestionId, setEditedQuestionId] = useState('')
+  const [Public, setPublic] = useState(false)
 
   function handleMobileOptions(){
     setOptions(prevstate => !prevstate)
@@ -80,7 +83,7 @@ function App() {
   function handleLogin(username, password){
 
     async function loginUser(){
-      const response = await fetch('https://291c-174-17-168-149.ngrok-free.app/auth', {
+      const response = await fetch('https://17ae-174-17-168-149.ngrok-free.app/auth', {
         method: "POST",
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({"user": username, "pass": password})
@@ -101,7 +104,7 @@ function App() {
 
   function handleRegister(username, password){
     async function registerUser(){
-      const response = await fetch('https://291c-174-17-168-149.ngrok-free.app/register', {
+      const response = await fetch('https://17ae-174-17-168-149.ngrok-free.app/register', {
         method: "POST",
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({"user": username, "pass": password})
@@ -119,7 +122,7 @@ function App() {
 
   function handleLogOut(){
     async function logoutUser(){
-      const response = await fetch('https://291c-174-17-168-149.ngrok-free.app/logout', {
+      const response = await fetch('https://17ae-174-17-168-149.ngrok-free.app/logout', {
         method: "GET"
       })
       if(response.ok){
@@ -301,6 +304,7 @@ function App() {
       setEditingMode(false)
       setEditedQuestionId('')
       setSearchResults('')
+      setPublic(false)
     }
   
   }, [location])
@@ -317,7 +321,7 @@ function App() {
       <loggedInContext.Provider value={loggedIn}>
         <Routes>
   
-          {/* LayoutWithHeader wraps this route and provides the header */}
+   
           <Route path='/quiz-project/' element={<>
             <LayoutWithHeader 
               loggedIn={loggedIn} 
@@ -340,8 +344,26 @@ function App() {
           </>
 
           } />
+
+          <Route path='/quiz-project/public' element={<>
+            <LayoutWithHeader 
+              loggedIn={loggedIn} 
+              handleMobileOptions={handleMobileOptions}
+              showOptions={showOptions}
+              width={width} 
+              handleLogOut={handleLogOut}
+              limit={limit}
+              setOptions={setOptions}
+            />
+              
+            <PublicQuizes publicSearchResults={publicSearchResults} setPublicSearchResults={setPublicSearchResults}/>
+          
+          
+          </>
+
+          } />  
   
-          {/* LayoutWithHeader wraps this route and provides the header */}
+       
           <Route path='/quiz-project/quizes' element={
             <>
             <LayoutWithHeader 
@@ -383,6 +405,8 @@ function App() {
           <Route path='/quiz-project/create' element={<Create 
             handleCheckedAnswer={handleCheckedAnswer} 
             checked={checked}
+            Public={Public}
+            setPublic={setPublic}
             quizName={quizName}
             questionTitle={questionTitle}
             handleQuestionTitle={handleQuestionTitle}
@@ -402,7 +426,7 @@ function App() {
           />} />
   
   
-          {/* LayoutWithHeader wraps this route and provides the header */}
+       
           <Route path='*' element={
               <>
             
@@ -417,7 +441,7 @@ function App() {
               </>
           } />
   
-          {/* LayoutWithHeader wraps this route and provides the header */}
+         
           <Route path='/quiz-project/login' element={
             <>
             
@@ -442,7 +466,7 @@ function App() {
             </>
           } />
   
-          {/* LayoutWithHeader wraps this route and provides the header */}
+         
           <Route path='/quiz-project/register' element={
             <>
             <LayoutWithHeader 
@@ -488,6 +512,8 @@ function App() {
             quizes={quizes}
             handleEditQuiz={handleEditQuiz}
             handleEditQuizItems={handleEditQuizItems}
+            Public={Public}
+            setPublic={setPublic}
           />} />
   
         </Routes>

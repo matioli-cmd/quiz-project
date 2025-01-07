@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { RiHomeSmileFill } from "react-icons/ri";
 import { CgLogIn } from "react-icons/cg";
 import { CgLogOut } from "react-icons/cg";
-import { useContext } from "react";
+import { MdPublic } from "react-icons/md";
 
 function Header({loggedIn, handleLogOut}){
 
@@ -43,6 +43,15 @@ function Header({loggedIn, handleLogOut}){
                 </div>
                 </Link>}
 
+                {loggedIn.Status && <Link className="linkDecoration" to={'/quiz-project/public'}>
+                <div className="Link">
+
+                    <MdPublic></MdPublic>
+                    <h1>Public Quizes</h1>
+
+                </div>
+                </Link>}
+
                 {loggedIn.Status && <Link className="linkDecoration"  to='/quiz-project/quizes'>
                 <div className="Link">
 
@@ -68,6 +77,8 @@ function Header({loggedIn, handleLogOut}){
                         </div>
                         </Link>
                     }
+
+
                     
                 
             </div>}
