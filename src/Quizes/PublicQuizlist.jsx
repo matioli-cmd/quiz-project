@@ -1,7 +1,7 @@
 import PublicQuiz from "./PublicQuiz"
 import styles from './Quizes.module.css'
 
-function PublicQuizList({publicFilteredQuizes, publicSearchResults}){
+function PublicQuizList({publicFilteredQuizes, publicSearchResults, hasPublicQuizes}){
     return(
         <>
         
@@ -11,7 +11,7 @@ function PublicQuizList({publicFilteredQuizes, publicSearchResults}){
 
         {publicFilteredQuizes.length == 0 && publicSearchResults.trim() != '' && <h1 className={styles.emptyPage}>No search results</h1>}
         
-        {publicFilteredQuizes.length == 0 && publicSearchResults.trim() == '' && <h1 className={styles.emptyPage}>There are no public quizes available</h1>}
+        {publicFilteredQuizes.length == 0 && publicSearchResults.trim() == '' && <h1 className={styles.emptyPage}>{hasPublicQuizes ? 'Loading public quizes...' : 'No public quizes available'}</h1>}
         </>
     )
 }

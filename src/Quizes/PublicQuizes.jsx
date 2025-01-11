@@ -3,7 +3,7 @@ import { useContext, useEffect } from "react"
 import { loggedInContext } from "../App"
 import PublicQuizList from "./PublicQuizlist"
 
-function PublicQuizes({publicSearchResults, setPublicSearchResults, publicQuizes, publicFilteredQuizes}){
+function PublicQuizes({publicSearchResults, setPublicSearchResults, publicQuizes, publicFilteredQuizes, hasPublicQuizes}){
 
     const loggedin = useContext(loggedInContext)
     const navigate = useNavigate()
@@ -27,7 +27,7 @@ function PublicQuizes({publicSearchResults, setPublicSearchResults, publicQuizes
             
             </div>
 
-            <PublicQuizList publicQuizes={publicQuizes} publicFilteredQuizes={publicFilteredQuizes} publicSearchResults={publicSearchResults}></PublicQuizList>
+            <PublicQuizList hasPublicQuizes={hasPublicQuizes} publicQuizes={publicQuizes} publicFilteredQuizes={publicFilteredQuizes} publicSearchResults={publicSearchResults}></PublicQuizList>
 
 
 

@@ -29,8 +29,9 @@ function App() {
   const [errorMessage, seterrorMessage] = useState('')
   const [grabbedData, setGrabbedData] = useState(false)
   const [hasQuizes, setHasQuizes] = useState(true)
+  const [hasPublicQuizes, setHasPublicQuizes] = useState(true)
   const [publicQuizes, setPublicQuizes] = useState([])
-  const host = 'http://localhost:3500'
+  const host = 'https://frozen-smallest-dale-ready.trycloudflare.com'
   
   // USER
   const previousLoggedIn = localStorage.getItem('loggedin')
@@ -63,6 +64,9 @@ function App() {
         const data = await response.json()
         if(data.length > 0){
           setPublicQuizes(data)
+        }
+        else{
+          setHasPublicQuizes(false)
         }
       }
       grabUsersQuiz()
@@ -219,8 +223,8 @@ function App() {
           credentials: 'include',
           body: JSON.stringify({quizName: quizName, objects: questions})})
         const data = await response.json()
-        console.log(data)
         setPublicQuizes(data)
+    
     }
     newPublicQuizTest()
   
@@ -443,7 +447,12 @@ function App() {
               setOptions={setOptions}
             />
               
-            <PublicQuizes publicFilteredQuizes={publicFilteredQuizes} publicQuizes={publicQuizes} publicSearchResults={publicSearchResults} setPublicSearchResults={setPublicSearchResults}/>
+            <PublicQuizes 
+            hasPublicQuizes={hasPublicQuizes} 
+            publicFilteredQuizes={publicFilteredQuizes}
+            publicQuizes={publicQuizes} 
+            publicSearchResults={publicSearchResults}
+            setPublicSearchResults={setPublicSearchResults}/>
           
           
           </>
