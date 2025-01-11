@@ -148,7 +148,22 @@ function App() {
             setHasQuizes(false)
           }
         }
+
+        async function grabPublicQuizes(){
+          const response = await fetch(`${host}/grabPublicQuizes`, {
+            method: 'GET',
+            credentials: 'include'
+          })
+          const data = await response.json()
+          if(data.length > 0){
+            setPublicQuizes(data)
+          }
+          else{
+            setHasPublicQuizes(false)
+          }
+        }
         grabUsersQuiz()
+        grabPublicQuizes()
         Navigate('/quiz-project/')
         
       }
