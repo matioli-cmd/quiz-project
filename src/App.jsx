@@ -42,7 +42,7 @@ function App() {
   useEffect(()=>{
     if(!grabbedData){
       async function grabUsersQuiz(){
-        const response = await fetch('http://localhost:3500/grabUserQuizes', {
+        const response = await fetch('https://9ea8-174-17-168-149.ngrok-free.app/grabUserQuizes', {
           method: 'GET',
           credentials: 'include'
         })
@@ -55,7 +55,7 @@ function App() {
         }
       }
       async function grabPublicQuizes(){
-        const response = await fetch('http://localhost:3500/grabPublicQuizes', {
+        const response = await fetch('https://9ea8-174-17-168-149.ngrok-free.app/grabPublicQuizes', {
           method: 'GET',
           credentials: 'include'
         })
