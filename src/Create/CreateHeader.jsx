@@ -17,8 +17,7 @@ function CreateHeader({quizName, handleQuizName, handleNewQuiz, questions, Publi
         
         <div className={styles.TitleText}>
 
-        <h1>Name</h1>
-        <input className={styles.TitleInput} value={quizName}  maxLength={25} onChange={(e) => handleQuizName(e)}></input>
+        <input placeholder='Name' className={styles.TitleInput} value={quizName}  maxLength={25} onChange={(e) => handleQuizName(e)}></input>
 
         </div>
         

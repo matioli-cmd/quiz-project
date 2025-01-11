@@ -4,7 +4,7 @@ import styles from './User.module.css'
 import { Link } from "react-router-dom"
 import { useState } from "react"
 
-function Login({width, limit, handleMobileOptions, showOptions, handleLogin}){
+function Login({width, limit, handleMobileOptions, showOptions, handleLogin, errorMessage}){
 
     const [password, setPassword] = useState('')
     const [username, setUsername] = useState('')
@@ -15,6 +15,8 @@ function Login({width, limit, handleMobileOptions, showOptions, handleLogin}){
         <div className={styles.Container}>
             
             <div className={styles.Background}>
+            <h1 className={styles.Error}>{errorMessage}</h1>
+
                 <h1 className={styles.Title}>Login to Qwizly</h1>
                 <h1 className={styles.Title2}>Welcome back!</h1>
                 

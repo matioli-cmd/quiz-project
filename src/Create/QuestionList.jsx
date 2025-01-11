@@ -2,7 +2,8 @@ import styles from './Create.module.css';
 import Question from './Question';
 
 function QuestionList({questions, handleNewQuestion,handleDeleteQuestion, handleEditQuestion, EditingMode, showQuestion}) {
-    return (
+  
+  return (
         <div className={styles.QuestionList}>
         <div className={styles.addQuestionContainer}>
         {!EditingMode ? 
@@ -26,7 +27,7 @@ function QuestionList({questions, handleNewQuestion,handleDeleteQuestion, handle
         
         <div className={styles.Questions}>
           {questions.length > 0 
-            ? questions.map((question, index) => <Question key={question.id} question={question} showQuestion={showQuestion} index={index} />) 
+            ? questions.map((question, index) => <Question key={index} question={question} showQuestion={showQuestion} index={index} />) 
             : null}
         </div>
         }

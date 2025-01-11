@@ -116,7 +116,7 @@ html{
   padding: 10px;             
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
   width: 170px; 
-  height: 250px;              
+  height: 253px;              
   margin: 20px auto;          
   text-align: center;       
   position: absolute;
@@ -184,8 +184,6 @@ html{
 .ApiItems-container {
   display: flex; 
   align-items: center;
-  gap: 20px; 
-  margin-top: 20px;
   text-align: center;
 }
 
@@ -216,6 +214,7 @@ html{
   text-align: center;
   justify-content: center;
   align-items: center;
+  font-weight: bold;
   border-radius: 5px;
 }
 

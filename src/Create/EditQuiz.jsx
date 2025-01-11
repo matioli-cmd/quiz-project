@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import {loggedInContext} from '../App'
 import { useNavigate } from 'react-router-dom';
 
+
 function EditQuiz({checked, handleEditQuiz, quizes, setPublic, Public, handleDeleteQuestion, showQuestion, questions, EditingMode, handleNewQuestion, handleCheckedAnswer, handleQuizName, quizName, questionTitle, handleEditQuestion, handleQuestionTitle, Answer1, Answer2, Answer3, Answer4, handleAnswerChange}){
 
     const loggedin = useContext(loggedInContext)
@@ -22,7 +23,7 @@ function EditQuiz({checked, handleEditQuiz, quizes, setPublic, Public, handleDel
 
     const { id } = useParams()
 
-    const Quiz = quizes.find((quiz) => quiz.id == id)
+    const Quiz = quizes.find((quiz) => quiz._id == id)
 
     return(
         <>

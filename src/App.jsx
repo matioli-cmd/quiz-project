@@ -12,7 +12,7 @@ import Register from './User/Register'
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import { createContext } from 'react'
 import LayoutWithHeader from './LayoutWithHeader'
-import PublicQuizes from './PublicQuizes'
+import PublicQuizes from './Quizes/PublicQuizes'
 export const loggedInContext = createContext({Status: false, Username: ''});
 
 function App() {
@@ -23,10 +23,13 @@ function App() {
 
   const [width, setwidth] = useState(window.innerWidth)
   const [showOptions, setOptions] = useState(false)
-  const storage = localStorage.getItem('Quizes')
-  const [quizes, setQuizes] = useState(storage ? JSON.parse(storage) : [])
+  const [quizes, setQuizes] = useState([])
   const [searchResults, setSearchResults] = useState('')
   const [publicSearchResults, setPublicSearchResults] = useState('')
+  const [errorMessage, seterrorMessage] = useState('')
+  const [grabbedData, setGrabbedData] = useState(false)
+  const [hasQuizes, setHasQuizes] = useState(true)
+  const [publicQuizes, setPublicQuizes] = useState([])
   
   // USER
   const previousLoggedIn = localStorage.getItem('loggedin')
@@ -35,6 +38,38 @@ function App() {
   useEffect(() => {
     localStorage.setItem('Quizes', JSON.stringify(quizes))
   }, [quizes])
+
+  useEffect(()=>{
+    if(!grabbedData){
+      async function grabUsersQuiz(){
+        const response = await fetch('http://localhost:3500/grabUserQuizes', {
+          method: 'GET',
+          credentials: 'include'
+        })
+        const data = await response.json()
+        if(data.length > 0){
+          setQuizes(data)
+        }
+        else{
+          setHasQuizes(false)
+        }
+      }
+      async function grabPublicQuizes(){
+        const response = await fetch('http://localhost:3500/grabPublicQuizes', {
+          method: 'GET',
+          credentials: 'include'
+        })
+        const data = await response.json()
+        if(data.length > 0){
+          setPublicQuizes(data)
+        }
+      }
+      grabUsersQuiz()
+      grabPublicQuizes()
+
+      setGrabbedData(true)
+    }
+  }, [])
 
   // QUESTION STATES
 
@@ -83,19 +118,39 @@ function App() {
   function handleLogin(username, password){
 
     async function loginUser(){
-      const response = await fetch('https://17ae-174-17-168-149.ngrok-free.app/auth', {
+      const response = await fetch('https://9ea8-174-17-168-149.ngrok-free.app/auth', {
         method: "POST",
         headers: {'Content-Type': 'application/json'},
+        credentials: 'include',
         body: JSON.stringify({"user": username, "pass": password})
       })
       const data = await response.json()
-      console.log(data)
 
       if(response.status == 201){
          localStorage.setItem('loggedin', JSON.stringify({'Status': true, 'Username': username}))
          setLoggedIn({Status: true, Username: username})
-         Navigate('/quiz-project/')
-         console.log(loggedIn)
+         
+         async function grabUsersQuiz(){
+          const response = await fetch('https://9ea8-174-17-168-149.ngrok-free.app/grabUserQuizes', {
+            method: 'GET',
+            credentials: 'include'
+          })
+          const data = await response.json()
+          if(data.length > 0){
+            setQuizes(data)
+          }
+          else{
+            setHasQuizes(false)
+          }
+        }
+        grabUsersQuiz()
+        Navigate('/quiz-project/')
+        
+      }
+      else{
+        if(data.message){
+          seterrorMessage(data.message)
+        }
       }
       
     }
@@ -104,7 +159,7 @@ function App() {
 
   function handleRegister(username, password){
     async function registerUser(){
-      const response = await fetch('https://17ae-174-17-168-149.ngrok-free.app/register', {
+      const response = await fetch('https://9ea8-174-17-168-149.ngrok-free.app/register', {
         method: "POST",
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({"user": username, "pass": password})
@@ -115,6 +170,11 @@ function App() {
       if(response.status == 201){
         Navigate('/quiz-project/login')
       }
+      else{
+        if(data.message){
+          seterrorMessage(data.message)
+        }
+      }
       
     }
     registerUser()
@@ -122,8 +182,9 @@ function App() {
 
   function handleLogOut(){
     async function logoutUser(){
-      const response = await fetch('https://17ae-174-17-168-149.ngrok-free.app/logout', {
-        method: "GET"
+      const response = await fetch('https://9ea8-174-17-168-149.ngrok-free.app/logout', {
+        method: "GET",
+        credentials: 'include',
       })
       if(response.ok){
         localStorage.removeItem('loggedin')
@@ -131,14 +192,41 @@ function App() {
       }
     }
     logoutUser()
+    setQuizes([])
   }
 
   function handleNewQuiz(){
     if(questions.length > 0 && quizName.trim() != ''){
-      setQuizes(s => [...s, {'id':  quizes.length > 0 ? quizes[quizes.length - 1].id + 1 : 0,
- 'quizName': quizName, objects: questions}])
-    
+
+    async function newQuizTest(){
+      const response = await fetch('https://9ea8-174-17-168-149.ngrok-free.app/newQuiz', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        credentials: 'include',
+        body: JSON.stringify({quizName: quizName, objects: questions})})
+      const data = await response.json()
+      setQuizes(data)
+    }
+
+    newQuizTest()
+
+    if(Public){
+      async function newPublicQuizTest(){
+        const response = await fetch('https://9ea8-174-17-168-149.ngrok-free.app/newPublic', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          credentials: 'include',
+          body: JSON.stringify({quizName: quizName, objects: questions})})
+        const data = await response.json()
+        console.log(data)
+        setPublicQuizes(data)
+    }
+    newPublicQuizTest()
+  
+  }
+
     Navigate('/quiz-project/quizes')
+
 
 
 }
@@ -167,7 +255,7 @@ function App() {
 
   function handleNewQuestion(){
     if(questionTitle.trim() != '' && Answer1.trim() != '' && Answer2.trim() != '' && Answer3.trim() != '' && Answer4.trim() != '' && checked.length > 0){
-      setQuestions(s => [...s, {'id': questions.length > 0 ? questions[questions.length - 1].id + 1 : 0,
+      setQuestions(s => [...s,{
         'title': questionTitle, 
         'answers':[Answer1, Answer2, Answer3, Answer4], 
         'correct':checked}])
@@ -177,8 +265,8 @@ function App() {
     }
   }
 
-  function DeleteQuiz(id){
-    const Quiz = quizes.find(quiz => quiz.id == id)
+  function DeleteQuiz(quiz){
+    const Quiz = quizes.find(q => q._id == quiz._id)
      Swal.fire({
             title: `Are you sure you want to delete "${Quiz.quizName.trim()}"?`,
             showCancelButton: true,
@@ -190,7 +278,7 @@ function App() {
             },
           }).then((result) => {
             if (result.isConfirmed) {
-              const FilteredQuizes = quizes.filter((quiz) => quiz.id != id)
+              const FilteredQuizes = quizes.filter(q => q._id != quiz._id)
               setQuizes(FilteredQuizes)
               
             }
@@ -205,14 +293,14 @@ function App() {
     setAnswer3(question.answers[2])
     setAnswer4(question.answers[3])
     setChecked(question.correct)
-    setEditedQuestionId(question.id)
+    setEditedQuestionId(question._id)
   }
 
   function handleDeleteQuestion(id){
     
     id = EditedQuestionId
 
-    const TemporaryArray = questions.filter((question) => question.id != id)
+    const TemporaryArray = questions.filter((question) => question._id != id)
 
     setQuestions(TemporaryArray)
 
@@ -222,14 +310,12 @@ function App() {
 
   }
 
-  function handleEnterEditQuiz(quiz){
+  function handleEnterEditQuiz(id){
 
-    const Quiz = quizes.find((q) => q.id == quiz.id)
-
-    console.log(Quiz)
+    const Quiz = quizes.find((q) => q._id == id)
 
     if(Quiz){
-                Navigate(`/quiz-project/edit/${quiz.id}`)
+                Navigate(`/quiz-project/edit/${id}`)
                 handleEditQuizItems(Quiz)
                 
             }
@@ -238,15 +324,12 @@ function App() {
 
   function handleEditQuiz(quiz){
 
-    const id = quiz.id
+    const id = quiz._id
     
     if(questions.length > 0 && quizName.trim() != ''){
-    setQuizes(quizes.map(q => q.id == id ? {...{'id': id,
-      'quizName': quizName, objects: questions}} : q))
+
     setEditingMode(false)
-    
     ResetQuestionFormat()
-    
     Navigate('/quiz-project/quizes')
     
   }
@@ -257,7 +340,7 @@ function App() {
 
     id = EditedQuestionId
 
-    const question = questions.find((question) => question.id == id)
+    const question = questions.find((question) => question._id == id)
     
     const edited_info = {'id': id,
       'title': questionTitle, 
@@ -266,7 +349,7 @@ function App() {
 
     if(questionTitle.trim() != '' && Answer1.trim() != '' && Answer2.trim() != '' && Answer3.trim() != '' && Answer4.trim() != '' && checked.length > 0){
 
-    setQuestions(questions.map(q => q.id == question.id ? {...edited_info} : q))
+    setQuestions(questions.map(q => q._id == question._id ? {...edited_info} : q))
     setEditingMode(false)
     
     ResetQuestionFormat()
@@ -305,6 +388,8 @@ function App() {
       setEditedQuestionId('')
       setSearchResults('')
       setPublic(false)
+      seterrorMessage('')
+      setPublicSearchResults('')
     }
   
   }, [location])
@@ -315,6 +400,7 @@ function App() {
   }
 
   const filteredQuizes = searchResults.trim() != '' ? quizes.filter((quiz) => quiz.quizName.toLowerCase().includes(searchResults.trim().toLowerCase())) : quizes
+  const publicFilteredQuizes = publicSearchResults.trim() != '' ? publicQuizes.filter((quiz) => quiz.quizName.toLowerCase().includes(publicSearchResults.trim().toLowerCase())) : publicQuizes
   
   return (
     <>
@@ -356,7 +442,7 @@ function App() {
               setOptions={setOptions}
             />
               
-            <PublicQuizes publicSearchResults={publicSearchResults} setPublicSearchResults={setPublicSearchResults}/>
+            <PublicQuizes publicFilteredQuizes={publicFilteredQuizes} publicQuizes={publicQuizes} publicSearchResults={publicSearchResults} setPublicSearchResults={setPublicSearchResults}/>
           
           
           </>
@@ -387,6 +473,7 @@ function App() {
                 handleEnterEditQuiz={handleEnterEditQuiz}
                 searchResults={searchResults}
                 setSearchResults={setSearchResults}
+                hasQuizes={hasQuizes}
               />
               </>
           } />
@@ -399,6 +486,7 @@ function App() {
             showOptions={showOptions}
             limit={limit}
             setOptions={setOptions}
+            publicQuizes={publicQuizes}
           />} />
   
           {/* No header */}
@@ -462,6 +550,7 @@ function App() {
                 handleLogin={handleLogin} 
                 handleMobileOptions={handleMobileOptions} 
                 showOptions={showOptions}
+                errorMessage={errorMessage}
               />
             </>
           } />
@@ -477,6 +566,7 @@ function App() {
               handleLogOut={handleLogOut}
               limit={limit}
               setOptions={setOptions}
+              
             />
               <Register 
                 width={width} 
@@ -484,6 +574,7 @@ function App() {
                 handleRegister={handleRegister} 
                 handleMobileOptions={handleMobileOptions} 
                 showOptions={showOptions}
+                errorMessage={errorMessage}
               />
           
             </>

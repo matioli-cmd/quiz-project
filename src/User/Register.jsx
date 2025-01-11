@@ -4,7 +4,7 @@ import MobileHeader from "../MobileHeader"
 import styles from './User.module.css'
 import { useState } from "react"
 
-function Register({width, limit, handleMobileOptions, showOptions, handleRegister}){
+function Register({width, limit, handleMobileOptions, showOptions, handleRegister, errorMessage}){
 
     const [password, setPassword] = useState('')
     const [username, setUsername] = useState('')
@@ -13,8 +13,11 @@ function Register({width, limit, handleMobileOptions, showOptions, handleRegiste
         <>
 
          <div className={styles.Container}>
+
+
                     
                     <div className={styles.Background}>
+                        <h1 className={styles.Error}>{errorMessage}</h1>
                         <h1 className={styles.Title}>Register with Qwizly</h1>
                         <h1 className={styles.Title2}>Create and play!</h1>
                         

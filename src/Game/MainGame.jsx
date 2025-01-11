@@ -11,7 +11,7 @@ import { useContext, useEffect } from "react";
 import {loggedInContext} from '../App'
 import { useNavigate } from 'react-router-dom';
 
-function MainGame({quizes, width, limit, handleMobileOptions, showOptions}){
+function MainGame({quizes, publicQuizes, width, limit, handleMobileOptions, showOptions}){
 
     const loggedin = useContext(loggedInContext)
     const navigate = useNavigate()
@@ -38,7 +38,10 @@ function MainGame({quizes, width, limit, handleMobileOptions, showOptions}){
       ];
 
 
-    const Quiz = quizes.find((quiz) => quiz.id == id)
+    let Quiz = quizes.find((q) => q._id == id)
+    if(!Quiz){
+        Quiz = publicQuizes.find((q) => q._id == id)
+    }
 
     const [currentQuestion, setCurrentQuestion] = useState(0)
     const [Score, setScore] = useState(0)

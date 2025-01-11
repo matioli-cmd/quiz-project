@@ -18,13 +18,13 @@ function Quiz({quiz, DeleteQuiz, width, handleEditQuiz, handleEnterEditQuiz}){
         </div>
 
         <div className={styles.ButtonSection}>
-          <Link to={`/quiz-project/play/${quiz.id}`} className={styles.PlayButton}>
+          <Link to={`/quiz-project/play/${quiz._id}`} className={styles.PlayButton}>
             Play
           </Link>
-          <div onClick={() => handleEnterEditQuiz(quiz)} className={styles.EditButton}>
+          <div onClick={() => handleEnterEditQuiz(quiz._id)} className={styles.EditButton}>
             <MdModeEdit></MdModeEdit>
           </div>
-          <div className={styles.TrashButton} onClick={() => DeleteQuiz(quiz.id)}>
+          <div className={styles.TrashButton} onClick={() => DeleteQuiz(quiz)}>
             <TbTrashXFilled />
           </div>
         </div>

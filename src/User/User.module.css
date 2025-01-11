@@ -72,11 +72,18 @@
 
 }
 
+.Error{
+    color: rgb(223, 67, 67);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 22px;
+}
+
 .Container{
     display: flex;
     align-items: center;
     justify-content: center;
     height: 85vh;
+    flex-direction: column;
 }
 
 @media screen and (max-width: 600px) {
@@ -103,6 +110,9 @@
 
    .Title2{
     font-size: 20px;
+   }
+   .Error{
+    font-size: 18px;
    }
   
   

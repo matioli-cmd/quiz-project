@@ -1,6 +1,6 @@
 import styles from './Create.module.css';
 
-function Question({question, showQuestion, index}){
+function Question({ question, showQuestion, index}){
 
     const number = index += 1
 
