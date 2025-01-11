@@ -30,6 +30,7 @@ function App() {
   const [grabbedData, setGrabbedData] = useState(false)
   const [hasQuizes, setHasQuizes] = useState(true)
   const [publicQuizes, setPublicQuizes] = useState([])
+  const host = 'http://localhost:3500'
   
   // USER
   const previousLoggedIn = localStorage.getItem('loggedin')
@@ -40,9 +41,9 @@ function App() {
   }, [quizes])
 
   useEffect(()=>{
-    if(!grabbedData){
+    if(!grabbedData && loggedIn.Status){
       async function grabUsersQuiz(){
-        const response = await fetch('https://9ea8-174-17-168-149.ngrok-free.app/grabUserQuizes', {
+        const response = await fetch(`${host}/grabUserQuizes`, {
           method: 'GET',
           credentials: 'include'
         })
@@ -55,7 +56,7 @@ function App() {
         }
       }
       async function grabPublicQuizes(){
-        const response = await fetch('https://9ea8-174-17-168-149.ngrok-free.app/grabPublicQuizes', {
+        const response = await fetch(`${host}/grabPublicQuizes`, {
           method: 'GET',
           credentials: 'include'
         })
@@ -118,7 +119,7 @@ function App() {
   function handleLogin(username, password){
 
     async function loginUser(){
-      const response = await fetch('https://9ea8-174-17-168-149.ngrok-free.app/auth', {
+      const response = await fetch(`${host}/auth`, {
         method: "POST",
         headers: {'Content-Type': 'application/json'},
         credentials: 'include',
@@ -131,7 +132,7 @@ function App() {
          setLoggedIn({Status: true, Username: username})
          
          async function grabUsersQuiz(){
-          const response = await fetch('https://9ea8-174-17-168-149.ngrok-free.app/grabUserQuizes', {
+          const response = await fetch(`${host}/grabUserQuizes`, {
             method: 'GET',
             credentials: 'include'
           })
@@ -159,7 +160,7 @@ function App() {
 
   function handleRegister(username, password){
     async function registerUser(){
-      const response = await fetch('https://9ea8-174-17-168-149.ngrok-free.app/register', {
+      const response = await fetch(`${host}/register`, {
         method: "POST",
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({"user": username, "pass": password})
@@ -182,7 +183,7 @@ function App() {
 
   function handleLogOut(){
     async function logoutUser(){
-      const response = await fetch('https://9ea8-174-17-168-149.ngrok-free.app/logout', {
+      const response = await fetch(`${host}/logout`, {
         method: "GET",
         credentials: 'include',
       })
@@ -199,7 +200,7 @@ function App() {
     if(questions.length > 0 && quizName.trim() != ''){
 
     async function newQuizTest(){
-      const response = await fetch('https://9ea8-174-17-168-149.ngrok-free.app/newQuiz', {
+      const response = await fetch(`${host}/newQuiz`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         credentials: 'include',
@@ -212,7 +213,7 @@ function App() {
 
     if(Public){
       async function newPublicQuizTest(){
-        const response = await fetch('https://9ea8-174-17-168-149.ngrok-free.app/newPublic', {
+        const response = await fetch(`${host}/newPublic`, {
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
           credentials: 'include',
