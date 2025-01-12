@@ -13,7 +13,7 @@ function QuizList({filteredQuizes, DeleteQuiz, hasQuizes, width, handleEditQuiz,
 
         {filteredQuizes.length == 0 && searchResults.trim() != '' && <h1 className={styles.emptyPage}>No search results</h1>}
         
-        {filteredQuizes.length == 0 && searchResults.trim() == '' && <h1 className={styles.emptyPage}>{hasQuizes ? 'Loading your quizes...' : 'You have no quizes'}</h1>}
+        {filteredQuizes.length == 0 && searchResults.trim() == '' && <h1 className={styles.emptyPage}>You have no quizes</h1>}
 
 
         </div>

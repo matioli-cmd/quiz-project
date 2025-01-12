@@ -6,7 +6,7 @@ import {loggedInContext} from '../App'
 import { useNavigate } from 'react-router-dom';
 import { useContext } from "react";
 
-function Quizes({handleMobileOptions, width, showOptions, limit, hasQuizes, quizes, filteredQuizes, DeleteQuiz, handleEditQuiz, handleEnterEditQuiz, searchResults, setSearchResults}){
+function Quizes({handleMobileOptions, width, showOptions, limit, quizes, filteredQuizes, DeleteQuiz, handleEditQuiz, handleEnterEditQuiz, searchResults, setSearchResults}){
     
     const loggedin = useContext(loggedInContext)
     const navigate = useNavigate()
@@ -29,7 +29,7 @@ function Quizes({handleMobileOptions, width, showOptions, limit, hasQuizes, quiz
 
             </div>}
             
-            <QuizList searchResults={searchResults} hasQuizes={hasQuizes} handleEnterEditQuiz={handleEnterEditQuiz} handleEditQuiz={handleEditQuiz} filteredQuizes={filteredQuizes} width={width} DeleteQuiz={DeleteQuiz}></QuizList>
+            <QuizList searchResults={searchResults} handleEnterEditQuiz={handleEnterEditQuiz} handleEditQuiz={handleEditQuiz} filteredQuizes={filteredQuizes} width={width} DeleteQuiz={DeleteQuiz}></QuizList>
 
         </div>
 

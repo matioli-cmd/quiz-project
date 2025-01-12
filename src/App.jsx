@@ -28,10 +28,8 @@ function App() {
   const [publicSearchResults, setPublicSearchResults] = useState('')
   const [errorMessage, seterrorMessage] = useState('')
   const [grabbedData, setGrabbedData] = useState(false)
-  const [hasQuizes, setHasQuizes] = useState(true)
-  const [hasPublicQuizes, setHasPublicQuizes] = useState(true)
   const [publicQuizes, setPublicQuizes] = useState([])
-  const host = 'https://frozen-smallest-dale-ready.trycloudflare.com'
+  const host = 'https://farmer-disclose-counts-o.trycloudflare.com'
   
   // USER
   const previousLoggedIn = localStorage.getItem('loggedin')
@@ -52,9 +50,7 @@ function App() {
         if(data.length > 0){
           setQuizes(data)
         }
-        else{
-          setHasQuizes(false)
-        }
+
       }
       async function grabPublicQuizes(){
         const response = await fetch(`${host}/grabPublicQuizes`, {
@@ -64,9 +60,6 @@ function App() {
         const data = await response.json()
         if(data.length > 0){
           setPublicQuizes(data)
-        }
-        else{
-          setHasPublicQuizes(false)
         }
       }
       grabUsersQuiz()
@@ -144,9 +137,7 @@ function App() {
           if(data.length > 0){
             setQuizes(data)
           }
-          else{
-            setHasQuizes(false)
-          }
+
         }
 
         async function grabPublicQuizes(){
@@ -157,9 +148,6 @@ function App() {
           const data = await response.json()
           if(data.length > 0){
             setPublicQuizes(data)
-          }
-          else{
-            setHasPublicQuizes(false)
           }
         }
         grabUsersQuiz()
@@ -223,28 +211,29 @@ function App() {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         credentials: 'include',
-        body: JSON.stringify({quizName: quizName, objects: questions})})
+        body: JSON.stringify({quizName: quizName, objects: questions, public: Public})})
       const data = await response.json()
-      setQuizes(data)
+      setQuizes(data.results)
+      
+      if(Public){
+        async function newPublicQuizTest(){
+          const response = await fetch(`${host}/newPublic`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            credentials: 'include',
+            body: JSON.stringify({quizName: quizName, objects: questions, id: data.id})})
+          const publicData = await response.json()
+          setPublicQuizes(publicData)
+      
+      }
+      
+      newPublicQuizTest()
+
     }
 
-    newQuizTest()
-
-    if(Public){
-      async function newPublicQuizTest(){
-        const response = await fetch(`${host}/newPublic`, {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          credentials: 'include',
-          body: JSON.stringify({quizName: quizName, objects: questions})})
-        const data = await response.json()
-        setPublicQuizes(data)
-    
-    }
-    newPublicQuizTest()
   
   }
-
+    newQuizTest()
     Navigate('/quiz-project/quizes')
 
 
@@ -299,7 +288,18 @@ function App() {
           }).then((result) => {
             if (result.isConfirmed) {
               const FilteredQuizes = quizes.filter(q => q._id != quiz._id)
+              const publicFilteredQuizes = publicQuizes.filter((q) => q._id != quiz._id)
               setQuizes(FilteredQuizes)
+              setPublicQuizes(publicFilteredQuizes)
+              async function removeQuizes(){
+                await fetch(`${host}/deleteQuiz`, {
+                  method: 'POST',
+                  headers: {'Content-Type': 'application/json'},
+                  credentials: 'include',
+                  body: JSON.stringify({id: quiz._id})
+                })
+              }
+              removeQuizes()
               
             }
           });
@@ -347,6 +347,24 @@ function App() {
     const id = quiz._id
     
     if(questions.length > 0 && quizName.trim() != ''){
+
+    async function updateQuiz(){
+      const response = await fetch(`${host}/updateQuiz`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        credentials: 'include',
+        body: JSON.stringify({quizName: quizName, public: Public, objects: questions, id: id})
+      })
+      const data = await response.json()
+      if(data.public){
+        setQuizes(data.user)
+        setPublicQuizes(data.public)
+      }
+      else{
+        setQuizes(data.user)
+      }
+    }
+    updateQuiz()
 
     setEditingMode(false)
     ResetQuestionFormat()
@@ -416,6 +434,7 @@ function App() {
 
   function handleEditQuizItems(quiz){
     setQuizName(quiz.quizName)
+    setPublic(quiz.public)
     setQuestions(quiz.objects)
   }
 
@@ -463,7 +482,6 @@ function App() {
             />
               
             <PublicQuizes 
-            hasPublicQuizes={hasPublicQuizes} 
             publicFilteredQuizes={publicFilteredQuizes}
             publicQuizes={publicQuizes} 
             publicSearchResults={publicSearchResults}
@@ -498,7 +516,6 @@ function App() {
                 handleEnterEditQuiz={handleEnterEditQuiz}
                 searchResults={searchResults}
                 setSearchResults={setSearchResults}
-                hasQuizes={hasQuizes}
               />
               </>
           } />
