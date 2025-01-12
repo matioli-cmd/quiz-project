@@ -22,6 +22,7 @@ function App() {
   const limit = 1000
 
   const [width, setwidth] = useState(window.innerWidth)
+  const [accessToken, setAccessToken] = useState('')
   const [showOptions, setOptions] = useState(false)
   const [quizes, setQuizes] = useState([])
   const [searchResults, setSearchResults] = useState('')
@@ -40,7 +41,20 @@ function App() {
   }, [quizes])
 
   useEffect(()=>{
+    
     if(!grabbedData && loggedIn.Status){
+
+      async function refreshToken(){
+        const response = await fetch(`${host}/refresh`, {
+          method: 'GET',
+          credentials: 'include'
+        })
+        if(!response.ok){
+          handleLogOut()
+        }
+      }
+      refreshToken()
+
       async function grabUsersQuiz(){
         const response = await fetch(`${host}/grabUserQuizes`, {
           method: 'GET',
@@ -127,6 +141,7 @@ function App() {
       if(response.status == 201){
          localStorage.setItem('loggedin', JSON.stringify({'Status': true, 'Username': username}))
          setLoggedIn({Status: true, Username: username})
+         setAccessToken(data.accessToken)
          
          async function grabUsersQuiz(){
           const response = await fetch(`${host}/grabUserQuizes`, {
@@ -201,6 +216,8 @@ function App() {
     }
     logoutUser()
     setQuizes([])
+    setPublicQuizes([])
+    Navigate('/quiz-project/login')
   }
 
   function handleNewQuiz(){
