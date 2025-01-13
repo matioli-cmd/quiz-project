@@ -30,7 +30,7 @@ function App() {
   const [errorMessage, seterrorMessage] = useState('')
   const [grabbedData, setGrabbedData] = useState(false)
   const [publicQuizes, setPublicQuizes] = useState([])
-  const host = 'https://farmer-disclose-counts-o.trycloudflare.com'
+  const host = 'https://gaps-matters-config-sand.trycloudflare.com'
   
   // USER
   const previousLoggedIn = localStorage.getItem('loggedin')
